@@ -34,6 +34,15 @@ body{background:var(--bg);font-family:var(--font);padding:12px 14px}
 .ibtn[data-k="hdi"].on{background:#db2777;border-color:#db2777;color:#fff}
 .ibtn[data-k="unemp"].on{background:#d97706;border-color:#d97706;color:#fff}
 .ibtn[data-k="gini"].on{background:#0891b2;border-color:#0891b2;color:#fff}
+.ibtn[data-k="tot"].on{background:#4338ca;border-color:#4338ca;color:#fff}
+.ibtn[data-k="debtgni"].on{background:#be123c;border-color:#be123c;color:#fff}
+.ibtn[data-k="debtserv"].on{background:#9f1239;border-color:#9f1239;color:#fff}
+.ibtn[data-k="gov"].on{background:#7e22ce;border-color:#7e22ce;color:#fff}
+.ibtn[data-k="rnd"].on{background:#4338ca;border-color:#4338ca;color:#fff}
+.ibtn[data-k="fdi"].on{background:#0e7490;border-color:#0e7490;color:#fff}
+.ibtn[data-k="co2"].on{background:#15803d;border-color:#15803d;color:#fff}
+.ibtn[data-k="hitech"].on{background:#1d4ed8;border-color:#1d4ed8;color:#fff}
+.ibtn[data-k="manuf"].on{background:#b45309;border-color:#b45309;color:#fff}
 .ibtn.disabled{opacity:.4;cursor:not-allowed;pointer-events:none}
 
 /* ── Concept tooltip (on button hover/tap) ── */
@@ -51,9 +60,32 @@ body{background:var(--bg);font-family:var(--font);padding:12px 14px}
 .trade-pill i{font-size:14px}
 .trade-pill:hover{background:#ca8a04;color:#fff}
 .trade-pill.on{background:#ca8a04;border-color:#ca8a04;color:#fff}
+.periphery-pill{flex:0 0 auto;display:flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600;padding:7px 13px;border-radius:20px;border:1px solid #4338ca;background:var(--bg);color:#4338ca;cursor:pointer;white-space:nowrap}
+.periphery-pill i{font-size:14px}
+.periphery-pill:hover{background:#4338ca;color:#fff}
+.periphery-pill.on{background:#4338ca;border-color:#4338ca;color:#fff}
 .scatter-pill{flex:0 0 auto;display:flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600;padding:7px 13px;border-radius:20px;border:1px solid #7c3aed;background:var(--bg);color:#7c3aed;cursor:pointer;white-space:nowrap}
 .scatter-pill i{font-size:14px}
 .scatter-pill:hover{background:#7c3aed;color:#fff}
+#analytics-wrap{position:relative;flex:0 0 auto}
+.analytics-pill{flex:0 0 auto;display:flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600;padding:7px 13px;border-radius:20px;border:1px solid #0f766e;background:var(--bg);color:#0f766e;cursor:pointer;white-space:nowrap}
+.analytics-pill i{font-size:14px}
+.analytics-pill:hover{background:#0f766e;color:#fff}
+.analytics-pill.on{background:#0f766e;border-color:#0f766e;color:#fff}
+.analytics-pill.has-active{background:#0f766e;border-color:#0f766e;color:#fff}
+#analytics-chevron{transition:transform .15s;font-size:13px!important}
+.analytics-pill.on #analytics-chevron{transform:rotate(180deg)}
+#analytics-panel{display:none;position:absolute;top:calc(100% + 6px);left:0;z-index:40;background:var(--bg);border:1px solid var(--bdr);border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.18);padding:10px;width:min(560px,88vw);max-height:70vh;overflow-y:auto}
+#analytics-panel.show{display:block}
+.ap-cat{padding:8px 4px;border-bottom:1px solid var(--bdr)}
+.ap-scatter-btn{width:100%;display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:9px 12px;border-radius:9px;border:1px dashed #0f766e;background:rgba(15,118,110,.06);color:#0f766e;font-size:12.5px;font-weight:700;cursor:pointer;text-align:left}
+.ap-scatter-btn:hover{background:rgba(15,118,110,.14)}
+.ap-scatter-btn i{font-size:15px;margin-right:4px}
+.ap-scatter-sub{font-size:10.5px;font-weight:400;color:var(--txt2);margin-left:19px}
+.ap-cat:last-child{border-bottom:none}
+.ap-cat-h{font-size:11.5px;font-weight:700;color:var(--txt2);display:flex;align-items:center;gap:5px;margin-bottom:7px}
+.ap-cat-h i{font-size:14px;color:#0f766e}
+.ap-cat-btns{display:flex;flex-wrap:wrap;gap:6px}
 
 /* ── Year control ── */
 #yctrl{display:flex;align-items:center;gap:9px;margin-bottom:4px}
@@ -75,6 +107,7 @@ body{background:var(--bg);font-family:var(--font);padding:12px 14px}
 .sc{background:var(--bg2);border-radius:9px;padding:8px 9px;min-width:0;display:flex;flex-direction:column;gap:2px}
 .sl{font-size:10px;color:var(--txt2);display:flex;align-items:center;gap:3px}
 .sv{font-size:14px;font-weight:700;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sv-country{display:block;font-size:9.5px;font-weight:500;color:var(--txt2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
 
 /* ── Map + side panel ── */
 #mwrap{display:flex;gap:9px;align-items:flex-start}
@@ -109,6 +142,9 @@ path.ctry{transition:fill .22s}
 #pc-btn{position:absolute;top:8px;right:9px;width:24px;height:24px;display:none;align-items:center;justify-content:center;background:var(--bg);border-radius:50%;border:1px solid var(--bdr);font-size:13px;color:var(--txt2);cursor:pointer}
 #pt{font-size:14px;font-weight:700;color:var(--txt);margin-bottom:9px;padding-right:22px;line-height:1.3}
 #pmetrics{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:9px}
+#analytic-metric{display:none;grid-template-columns:1fr;gap:6px;margin-bottom:9px}
+#analytic-metric .pm{border:1px solid var(--bdr2)}
+#am-analysis{display:none;font-size:11px;line-height:1.55;padding:8px 9px;border-radius:8px;margin-top:6px;background:rgba(15,118,110,.08);border:1px solid rgba(15,118,110,.25);color:var(--txt)}
 #hdi-components{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:9px;padding-top:9px;border-top:1px dashed var(--bdr2)}
 .hdi-components-title{grid-column:1 / -1;font-size:10.5px;font-weight:700;color:var(--txt2);display:flex;align-items:center;margin-bottom:-2px}
 .pm{background:var(--bg);border-radius:8px;padding:7px 8px;min-width:0}
@@ -173,6 +209,10 @@ path.ctry{transition:fill .22s}
 #scatter-legend span{display:inline-flex;align-items:center;gap:4px}
 #scatter-legend i{width:9px;height:9px;border-radius:50%;display:inline-block}
 #scatter-note{font-size:11.5px;color:var(--txt2);margin-top:8px;line-height:1.5}
+#scatter-tt{position:absolute;background:var(--bg);border:1px solid var(--bdr);border-radius:8px;padding:6px 9px;font-size:11.5px;pointer-events:none;display:none;z-index:30;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+#scatter-tt b{display:block;color:var(--txt);margin-bottom:2px}
+#scatter-tt span{color:var(--txt2)}
+.scatter-quad-lbl{font-size:9.5px;font-weight:600;fill:var(--txt3)}
 #trade-close{position:absolute;top:10px;right:12px;width:26px;height:26px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--bdr);background:var(--bg);color:var(--txt2);cursor:pointer;font-size:15px}
 .bloc-card{border:1px solid var(--bdr2);border-left:4px solid #ca8a04;border-radius:8px;padding:11px 13px;margin-bottom:10px;background:var(--bg2)}
 .bloc-card h4{font-size:13px;font-weight:700;color:var(--txt);margin-bottom:3px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
@@ -181,7 +221,16 @@ path.ctry{transition:fill .22s}
 .bloc-card p{font-size:12px;color:var(--txt2);line-height:1.55;margin-bottom:7px}
 .bloc-members{display:flex;flex-wrap:wrap;gap:5px}
 .bloc-member{font-size:10.5px;background:var(--bg);border:1px solid var(--bdr2);border-radius:12px;padding:2px 9px;color:var(--txt)}
-.help-section{border-left:3px solid #2563eb;padding-left:11px;margin-bottom:13px}
+.help-section{border-left:3px solid #2563eb;padding-left:11px;margin-bottom:13px;display:none}
+.help-section.active{display:block}
+#guide-topics{margin-bottom:14px}
+.gt-cluster{margin-bottom:10px}
+.gt-cluster-title{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:var(--txt2);margin-bottom:6px}
+.gt-chips{display:flex;flex-wrap:wrap;gap:6px}
+.gt-btn{font-size:12px;font-weight:600;padding:6px 12px;border-radius:16px;border:1px solid var(--bdr2);background:var(--bg);color:var(--txt);cursor:pointer;white-space:nowrap}
+.gt-btn:hover{border-color:#2563eb;color:#2563eb}
+.gt-btn.on{background:#2563eb;border-color:#2563eb;color:#fff}
+#guide-placeholder{font-size:12.5px;color:var(--txt2);text-align:center;padding:24px 8px;border:1px dashed var(--bdr2);border-radius:10px}
 
 /* ── Print report overlay ── */
 #report-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:250;overflow-y:auto;padding:16px;-webkit-overflow-scrolling:touch}
@@ -247,13 +296,83 @@ path.ctry{transition:fill .22s}
     <button class="ibtn" data-k="unemp" data-concept="Tasa de desempleo (%)" data-def="Porcentaje de la población activa que busca trabajo pero no lo encuentra. Un desempleo elevado indica problemas estructurales en la economía.">
       <i class="ti ti-briefcase"></i>Desempleo
     </button>
-    <button class="ibtn" data-k="gini" data-concept="Coeficiente de Gini" data-def="Mide la desigualdad en la distribución del ingreso dentro de un país, de 0 (igualdad perfecta) a 100 (desigualdad máxima). A diferencia de los demás indicadores del mapa, el Gini no mide el nivel de vida promedio sino cómo se reparte: dos países con el mismo PIB per cápita pueden tener Gini muy distintos. Fuente: Banco Mundial (encuestas de hogares, cobertura irregular por país y año — no todos los países tienen dato cada año).">
-      <i class="ti ti-scale"></i>Gini
-    </button>
+  </div>
+  <div id="analytics-wrap">
+  <button class="analytics-pill" id="analytics-btn" title="Indicadores analíticos agrupados por función" aria-expanded="false">
+    <i class="ti ti-layout-grid"></i>Función analítica<i class="ti ti-chevron-down" id="analytics-chevron"></i></button>
+  <div id="analytics-panel" role="menu">
+    <div class="ap-cat">
+      <div class="ap-cat-h"><i class="ti ti-arrows-shuffle"></i>1. Dependencia estructural / posición en la economía mundial</div>
+      <div class="ap-cat-btns">
+        <button class="ibtn" data-k="tot" data-concept="Términos de intercambio (índice, 2000=100)" data-def="Relación entre los precios de lo que un país exporta y los precios de lo que importa. Un valor creciente significa que sus exportaciones compran más importaciones que antes (gana poder adquisitivo internacional); un valor decreciente significa lo contrario. Es la variable central de la tesis Prebisch-Singer sobre el deterioro de los términos de intercambio de los exportadores de materias primas. Fuente: Banco Mundial (TT.PRI.MRCH.XD.WD).">
+          <i class="ti ti-arrows-exchange"></i>Términos interc.
+        </button>
+        <button class="ibtn" data-k="debtgni" data-concept="Deuda externa (% del INB)" data-def="Saldo total de la deuda externa de un país como porcentaje de su Ingreso Nacional Bruto. Variable central en el debate sobre condicionalidad del FMI/Banco Mundial y sobre la 'trampa de la deuda'. Cobertura limitada principalmente a países de ingreso bajo y medio reportados en las Estadísticas de Deuda Internacional del Banco Mundial (DT.DOD.DECT.GN.ZS); las economías de ingreso alto suelen no tener dato.">
+          <i class="ti ti-file-invoice"></i>Deuda ext./INB
+        </button>
+        <button class="ibtn" data-k="debtserv" data-concept="Servicio de deuda (% de exportaciones)" data-def="Porcentaje de los ingresos por exportaciones de bienes y servicios que un país destina a pagar intereses y capital de su deuda externa. Cuanto más alto, menos margen fiscal queda tras cumplir con los acreedores externos. Fuente: Banco Mundial (DT.TDS.DECT.EX.ZS), misma cobertura limitada que la deuda externa.">
+          <i class="ti ti-receipt-2"></i>Serv. deuda/export.
+        </button>
+      </div>
+    </div>
+    <div class="ap-cat">
+      <div class="ap-cat-h"><i class="ti ti-scale"></i>2. Desigualdad y bienestar más allá del promedio</div>
+      <div class="ap-cat-btns">
+        <button class="ibtn" data-k="gini" data-concept="Coeficiente de Gini" data-def="Mide la desigualdad en la distribución del ingreso dentro de un país, de 0 (igualdad perfecta) a 100 (desigualdad máxima). A diferencia de los demás indicadores del mapa, el Gini no mide el nivel de vida promedio sino cómo se reparte: dos países con el mismo PIB per cápita pueden tener Gini muy distintos. Fuente: Banco Mundial (encuestas de hogares, cobertura irregular por país y año — no todos los países tienen dato cada año).">
+          <i class="ti ti-scale"></i>Gini
+        </button>
+      </div>
+    </div>
+    <div class="ap-cat">
+      <div class="ap-cat-h"><i class="ti ti-gavel"></i>3. Gobernanza y poder político</div>
+      <div class="ap-cat-btns">
+        <button class="ibtn" data-k="gov" data-concept="Control de la corrupción (Worldwide Governance Indicators)" data-def="Percepción de hasta qué punto el poder público se ejerce para beneficio privado, incluyendo captura del Estado por élites. Escala de -2.5 (débil) a +2.5 (fuerte). Es 1 de las 6 dimensiones del índice WGI del Banco Mundial; se usa aquí como indicador representativo de calidad institucional/gobernanza. Fuente: Banco Mundial, Worldwide Governance Indicators (CC.EST).">
+          <i class="ti ti-gavel"></i>Gobernanza
+        </button>
+      </div>
+    </div>
+    <div class="ap-cat">
+      <div class="ap-cat-h"><i class="ti ti-bulb"></i>4. Innovación y brecha tecnológica</div>
+      <div class="ap-cat-btns">
+        <button class="ibtn" data-k="rnd" data-concept="Inversión en I+D (% del PIB)" data-def="Gasto interno bruto en investigación y desarrollo como porcentaje del PIB. Variable clave en el debate sobre la 'trampa de ingreso medio' y la dependencia tecnológica del centro por parte de la periferia/semi-periferia. Fuente: Banco Mundial/UNESCO (GB.XPD.RSDV.GD.ZS).">
+          <i class="ti ti-bulb"></i>I+D (% PIB)
+        </button>
+        <button class="ibtn" data-k="fdi" data-concept="Inversión Extranjera Directa recibida (% del PIB)" data-def="Entradas netas de IED como porcentaje del PIB. Un valor alto puede leerse como integración/atractivo de capital, pero también como dependencia de capital externo — la interpretación depende del marco teórico usado. Fuente: Banco Mundial (BX.KLT.DINV.WD.GD.ZS).">
+          <i class="ti ti-building-factory-2"></i>IED recibida
+        </button>
+        <button class="ibtn" data-k="hitech" data-concept="Exportaciones de alta tecnología (% de exportaciones manufactureras)" data-def="Productos con alta intensidad de I+D: aeroespacial, computación, farmacéutica, instrumentos científicos, maquinaria eléctrica. Distingue directamente el tipo de inserción comercial que separa a los países 'centro' (que exportan tecnología) de los países 'periferia' (que exportan materias primas o manufacturas básicas) en la teoría estructuralista. Fuente: Banco Mundial/Comtrade-WITS (TX.VAL.TECH.MF.ZS).">
+          <i class="ti ti-cpu"></i>Export. alta tecnología
+        </button>
+        <button class="ibtn" data-k="manuf" data-concept="Valor agregado manufacturero (% del PIB)" data-def="Tamaño del sector manufacturero como proporción de la economía. Mide directamente el grado de industrialización de un país — la variable que distingue una estrategia de sustitución de importaciones o industrialización orientada a la exportación de una economía primario-exportadora. Fuente: Banco Mundial (NV.IND.MANF.ZS).">
+          <i class="ti ti-building-factory"></i>Valor agr. manufacturero
+        </button>
+      </div>
+    </div>
+    <div class="ap-cat">
+      <div class="ap-cat-h"><i class="ti ti-leaf"></i>5. Sostenibilidad (debates Norte-Sur)</div>
+      <div class="ap-cat-btns">
+        <button class="ibtn" data-k="co2" data-concept="Emisiones de CO₂ (t per cápita)" data-def="Toneladas de CO₂ equivalente emitidas por habitante al año (excluye uso de suelo/LULUCF). Base del argumento de 'deuda ecológica' del Sur Global hacia el Norte: los países ricos han emitido acumulativamente mucho más per cápita, aunque hoy algunas economías emergentes emitan más en términos absolutos. Fuente: Banco Mundial / EDGAR-JRC (EN.GHG.CO2.PC.CE.AR5).">
+          <i class="ti ti-leaf"></i>CO₂ per cápita
+        </button>
+      </div>
+    </div>
+    <div class="ap-cat">
+      <div class="ap-cat-h"><i class="ti ti-chart-dots"></i>6. Visualización comparativa</div>
+      <div class="ap-cat-btns">
+        <button class="ibtn" id="scatter-btn" title="Crecimiento vs. desarrollo humano" data-concept="Crecimiento vs. desarrollo humano" data-def="Compara el PIB per cápita de cada país con su IDH para ver si más ingreso se traduce en más desarrollo humano, agrupando a los países en cuadrantes en vez de un mar de puntos difícil de leer.">
+          <i class="ti ti-chart-dots"></i>Crecimiento vs. desarrollo humano
+        </button>
+      </div>
+    </div>
+    <div class="ap-cat" style="border-bottom:none;padding-top:2px">
+      <button id="preload-compare-btn" class="ap-scatter-btn"><i class="ti ti-scale"></i>Comparar: Asia Oriental vs. América Latina<span class="ap-scatter-sub">Precarga Corea del Sur, Taiwán, Singapur, China, Argentina, Brasil y México para la síntesis comparativa (Lámina 13)</span></button>
+    </div>
+  </div>
   </div>
   <button class="trade-pill" id="trade-btn" title="Bloques comerciales internacionales" data-concept="Principales bloques comerciales y de integración económica" data-def="">
     <i class="ti ti-world-www"></i>Comercio Internacional</button>
-  <button class="scatter-pill" id="scatter-btn" title="Dispersión PIB per cápita vs. IDH"><i class="ti ti-chart-dots"></i>Dispersión</button>
+  <button class="periphery-pill" id="periphery-btn" title="Clasificación centro / semi-periferia / periferia (Wallerstein)">
+    <i class="ti ti-hierarchy-3"></i>Centro-Periferia</button>
   <button class="help-pill" id="help-btn" title="Guía de uso"><i class="ti ti-help-circle"></i>Guía</button>
 </div>
 
@@ -300,7 +419,13 @@ path.ctry{transition:fill .22s}
         <div class="pm"><div class="pml"><i class="ti ti-building-bank"></i>PIB total</div><div class="pmv" id="m2">—</div></div>
         <div class="pm"><div class="pml"><i class="ti ti-heart"></i>IDH</div><div class="pmv" id="m3">—</div></div>
         <div class="pm"><div class="pml"><i class="ti ti-briefcase"></i>Desempleo</div><div class="pmv" id="m4">—</div></div>
-        <div class="pm"><div class="pml"><i class="ti ti-scale"></i>Gini (desigualdad)</div><div class="pmv" id="m5">—</div></div>
+      </div>
+      <div id="analytic-metric" style="display:none">
+        <div class="pm" style="grid-column:1/-1">
+          <div class="pml" id="am-lbl"><i class="ti ti-layout-grid"></i>—</div>
+          <div class="pmv" id="am-val" style="font-size:18px">—</div>
+        </div>
+        <div id="am-analysis"></div>
       </div>
       <div id="hdi-components" style="display:none">
         <div class="hdi-components-title"><i class="ti ti-chart-donut-3" style="margin-right:5px"></i>Componentes del IDH</div>
@@ -327,14 +452,55 @@ path.ctry{transition:fill .22s}
   </div>
 </div>
 
-<div id="credit">Fuente: Banco Mundial (World Development Indicators, incl. Gini SI.POV.GINI) · IDH: PNUD, Informe de Desarrollo Humano · Límites: Natural Earth / world-atlas</div>
+<div id="credit">Fuente: Banco Mundial (World Development Indicators, incl. Gini SI.POV.GINI, términos de intercambio TT.PRI.MRCH.XD.WD, deuda externa DT.DOD.DECT.GN.ZS y DT.TDS.DECT.EX.ZS, gobernanza CC.EST, I+D GB.XPD.RSDV.GD.ZS, IED BX.KLT.DINV.WD.GD.ZS, CO₂ EN.GHG.CO2.PC.CE.AR5, exportaciones de alta tecnología TX.VAL.TECH.MF.ZS, valor agregado manufacturero NV.IND.MANF.ZS) · IDH: PNUD, Informe de Desarrollo Humano · Centro/semi-periferia: Babones (2005), Journal of World-Systems Research 11:29-55 · Límites: Natural Earth / world-atlas</div>
 
 <!-- ═══ HELP MODAL ═══ -->
 <div id="help-overlay" role="dialog" aria-modal="true">
   <div id="help-modal">
     <button id="help-close">×</button>
     <h2><i class="ti ti-map-2" style="vertical-align:middle;margin-right:6px"></i>Guía de uso</h2>
-    <div class="help-section">
+    <div id="guide-topics">
+      <div class="gt-cluster">
+        <div class="gt-cluster-title">Navegación e indicadores base</div>
+        <div class="gt-chips">
+          <button class="gt-btn" data-topic="t-buttons">Botones de indicador</button>
+          <button class="gt-btn" data-topic="t-stats">Barra de estadísticas</button>
+          <button class="gt-btn" data-topic="t-analytic">Función analítica (10 indicadores)</button>
+          <button class="gt-btn" data-topic="t-hdi">Componentes del IDH</button>
+          <button class="gt-btn" data-topic="t-gini">Gini y desigualdad</button>
+          <button class="gt-btn" data-topic="t-structural">Dependencia estructural (deuda, términos interc.)</button>
+          <button class="gt-btn" data-topic="t-colors">Escala de colores</button>
+        </div>
+      </div>
+      <div class="gt-cluster">
+        <div class="gt-cluster-title">Vistas especiales del mapa</div>
+        <div class="gt-chips">
+          <button class="gt-btn" data-topic="t-scatter">Crecimiento vs. desarrollo humano</button>
+          <button class="gt-btn" data-topic="t-trade">Comercio Internacional</button>
+          <button class="gt-btn" data-topic="t-centerperiphery">Centro-Periferia (Wallerstein)</button>
+        </div>
+      </div>
+      <div class="gt-cluster">
+        <div class="gt-cluster-title">Herramientas de análisis</div>
+        <div class="gt-chips">
+          <button class="gt-btn" data-topic="t-timeline">Línea de tiempo</button>
+          <button class="gt-btn" data-topic="t-panel">Panel de país</button>
+          <button class="gt-btn" data-topic="t-classification">Clasificación de desarrollo</button>
+          <button class="gt-btn" data-topic="t-report">Informe comparativo</button>
+        </div>
+      </div>
+      <div class="gt-cluster">
+        <div class="gt-cluster-title">Rigor metodológico (uso doctoral)</div>
+        <div class="gt-chips">
+          <button class="gt-btn" data-topic="t-limitations">Limitaciones del mapa</button>
+          <button class="gt-btn" data-topic="t-roadmap">Hoja de ruta de ampliación</button>
+          <button class="gt-btn" data-topic="t-references">Referencias y fuentes primarias</button>
+        </div>
+      </div>
+    </div>
+    <div id="guide-placeholder">Elige un tema arriba para ver su explicación. Cada botón muestra únicamente el contenido de ese tema.</div>
+    <div id="guide-content">
+    <div class="help-section" id="t-buttons">
       <h3>Botones de indicador</h3>
       <p>Selecciona qué variable colorea el mapa. Al pasar el cursor (o mantener pulsado en móvil) aparece una explicación del concepto en la parte inferior de la pantalla.</p>
       <table><tr><th>Botón</th><th>Qué mide</th></tr>
@@ -342,10 +508,27 @@ path.ctry{transition:fill .22s}
         <tr><td>PIB total</td><td>Tamaño de la economía en miles de millones USD</td></tr>
         <tr><td>IDH</td><td>Índice de Desarrollo Humano 0–1 (PNUD, serie histórica 1990–2023)</td></tr>
         <tr><td>Desempleo</td><td>% de la fuerza laboral sin trabajo</td></tr>
-        <tr><td>Gini</td><td>Desigualdad en la distribución del ingreso dentro de cada país, 0–100 (Banco Mundial, cobertura irregular por país/año)</td></tr>
       </table>
+      <p style="margin-top:8px">Estos 4 son los indicadores "de resultado" (nivel de vida), siempre visibles en la barra superior. Los indicadores de posición estructural, poder y sostenibilidad están agrupados aparte — ver la sección siguiente.</p>
     </div>
-    <div class="help-section">
+    <div class="help-section" id="t-stats">
+      <h3>Barra de estadísticas globales</h3>
+      <p>Justo encima del mapa, 4 tarjetas resumen el indicador activo para el año seleccionado: <strong>Países con datos</strong> (cuántos de los ~195 países tienen ese dato ese año — útil para juzgar la cobertura, sobre todo en los indicadores de "Función analítica"), <strong>Promedio global</strong> (media simple entre los países con dato), y <strong>Máximo</strong>/<strong>Mínimo</strong>, que ahora muestran también el <strong>nombre del país</strong> que alcanza ese valor —no solo la cifra—, igual que el modo "Comercio Internacional" ya identifica el bloque concreto en vez de un número abstracto. En modo "Comercio Internacional" estas mismas 4 tarjetas cambian de significado: número de países en algún bloque, cantidad de bloques, el bloque del país seleccionado y cuántos países lo integran.</p>
+    </div>
+    <div class="help-section" style="border-left-color:#0f766e" id="t-analytic">
+      <h3><i class="ti ti-layout-grid" style="margin-right:4px;color:#0f766e"></i>Función analítica (menú desplegable)</h3>
+      <p>El botón <strong>"Función analítica"</strong>, junto a "Comercio Internacional", agrupa 10 indicadores adicionales que no describen el nivel de vida sino la <strong>posición</strong> de cada país en la economía y la política mundial — el eje central de un análisis centro-periferia. Se organizan en 5 fases; al pulsar el botón se despliega un panel con las 5 agrupadas por encabezado, para no saturar la barra superior con botones sueltos.</p>
+      <p style="margin-top:8px">Al seleccionar un país con cualquiera de estos 10 indicadores activo, el panel lateral se simplifica: oculta los 4 indicadores principales y muestra <strong>únicamente</strong> el valor del indicador elegido, su micro-gráfico histórico, y un párrafo de análisis automático (posición del país frente al resto del mundo ese año, tendencia desde el primer dato disponible, y una lectura sustantiva).</p>
+      <table><tr><th>Fase</th><th>Indicador(es)</th><th>Qué aporta al análisis</th></tr>
+        <tr><td><i class="ti ti-arrows-shuffle"></i> 1. Dependencia estructural / posición en la economía mundial</td><td>Términos de intercambio · Deuda externa/INB · Servicio de deuda/exportaciones</td><td>Si un país gana o pierde poder adquisitivo internacional, y cuánto de su ingreso externo está comprometido con acreedores — el núcleo del debate sobre condicionalidad del FMI/Banco Mundial y la tesis Prebisch-Singer.</td></tr>
+        <tr><td><i class="ti ti-scale"></i> 2. Desigualdad y bienestar más allá del promedio</td><td>Coeficiente de Gini</td><td>Cómo se reparte el ingreso dentro de un país — el IDH y el PIB per cápita ocultan esto por diseño, al trabajar con promedios.</td></tr>
+        <tr><td><i class="ti ti-gavel"></i> 3. Gobernanza y poder político</td><td>Control de la corrupción (WGI)</td><td>Calidad institucional — variable central en la literatura sobre por qué unos países capturan más valor de la globalización que otros (North, Acemoglu-Robinson).</td></tr>
+        <tr><td><i class="ti ti-bulb"></i> 4. Innovación y brecha tecnológica</td><td>Inversión en I+D (% PIB) · IED recibida (% PIB)</td><td>Capacidad de generar tecnología propia vs. depender de capital e innovación externos — la base material de la "trampa de ingreso medio".</td></tr>
+        <tr><td><i class="ti ti-leaf"></i> 5. Sostenibilidad (debates Norte-Sur)</td><td>Emisiones de CO₂ per cápita</td><td>Quién contribuye más, hoy, a la crisis climática por habitante — punto de partida del argumento de "deuda ecológica" del Sur Global hacia el Norte.</td></tr>
+      </table>
+      <p style="margin-top:8px">Al seleccionar cualquiera de estos 10 indicadores, el botón "Función analítica" se resalta en verde-azulado para indicar que hay uno activo, aunque el panel esté cerrado. El panel se cierra automáticamente al elegir un indicador, al hacer clic fuera de él, o con la tecla Escape.</p>
+    </div>
+    <div class="help-section" id="t-hdi">
       <h3>Componentes del IDH</h3>
       <p>El Índice de Desarrollo Humano no es un dato único: es un índice compuesto que el PNUD construye a partir de <strong>3 dimensiones</strong>, cada una medida con uno o dos indicadores. Al seleccionar un país con el indicador IDH activo, el panel lateral muestra estos 4 valores:</p>
       <table><tr><th>Dimensión</th><th>Indicador(es)</th><th>Qué capta</th></tr>
@@ -357,34 +540,51 @@ path.ctry{transition:fill .22s}
       <p style="margin-top:8px">Cada dimensión se normaliza a una escala de 0 a 1 usando valores mínimos y máximos fijados por el PNUD, y el IDH final es la <strong>media geométrica</strong> de las 3 dimensiones (no un promedio simple). Esto es clave: al usar la media geométrica, un país no puede compensar totalmente una carencia grave en una dimensión (por ejemplo, salud) con un buen desempeño en otra (por ejemplo, ingreso); el índice penaliza el desarrollo desequilibrado. Por eso el IDH suele usarse como contrapeso metodológico al PIB per cápita: dos países con ingresos similares pueden tener IDH muy distintos si difieren en salud o educación, lo que es especialmente relevante al comparar países centrales y periféricos con estructuras productivas distintas.</p>
       <p style="margin-top:8px">Limitación a tener en cuenta: el IDH no incorpora distribución del ingreso (desigualdad interna), sostenibilidad ambiental ni informalidad laboral. El PNUD publica variantes complementarias —IDH ajustado por Desigualdad (IDH-D) e Índice de Desarrollo de Género— que no están incluidas en este mapa pero conviene mencionar al citar el indicador en un análisis riguroso.</p>
     </div>
-    <div class="help-section">
+    <div class="help-section" id="t-gini">
       <h3>Coeficiente de Gini (desigualdad)</h3>
       <p>A diferencia de los otros 4 indicadores —que describen <em>niveles</em> o <em>promedios</em>— el Gini describe <strong>cómo se reparte</strong> el ingreso dentro de un país, en una escala de 0 (igualdad perfecta) a 100 (un solo hogar concentra todo el ingreso). Es el complemento obligado del PIB per cápita y del IDH: dos países pueden tener el mismo IDH y un Gini muy distinto, es decir, un "mismo nivel promedio de desarrollo" repartido de forma muy diferente entre su población.</p>
-      <p style="margin-top:8px"><strong>Limitación importante:</strong> el Gini del Banco Mundial proviene de encuestas de hogares nacionales, que no se levantan todos los años en todos los países. Es normal ver huecos ("—") de varios años seguidos en el mini-gráfico histórico de un país, especialmente en economías de bajo ingreso; eso significa "sin encuesta ese año", no que la desigualdad haya desaparecido. Por esta razón el Gini es también el indicador con menor cobertura de los 5 disponibles en el mapa.</p>
+      <p style="margin-top:8px"><strong>Limitación importante:</strong> el Gini del Banco Mundial proviene de encuestas de hogares nacionales, que no se levantan todos los años en todos los países. Es normal ver huecos ("—") de varios años seguidos en el mini-gráfico histórico de un país, especialmente en economías de bajo ingreso; eso significa "sin encuesta ese año", no que la desigualdad haya desaparecido. Por esta razón el Gini es también el indicador con menor cobertura de los 5 originales del mapa.</p>
     </div>
-    <div class="help-section">
-      <h3>Dispersión PIB per cápita vs. IDH</h3>
-      <p>El botón <strong>"Dispersión"</strong> de la barra superior abre un gráfico de puntos con el PIB per cápita (escala logarítmica) en el eje horizontal y el IDH en el eje vertical, para el año que tengas seleccionado en la línea de tiempo. Cada punto es un país, coloreado según su bloque comercial (los mismos colores que el modo "Comercio Internacional"; gris = sin bloque registrado). Pasa el cursor sobre un punto para ver el país, su PIB per cápita y su IDH exactos.</p>
+    <div class="help-section" style="border-left-color:#4338ca" id="t-structural">
+      <h3>Términos de intercambio, deuda externa y servicio de deuda</h3>
+      <p>Estos 3 botones son el primer bloque de indicadores de <strong>dependencia estructural</strong> del mapa: a diferencia de PIB, IDH, desempleo y Gini —que describen el nivel de vida y su distribución—, estos miden la <em>posición</em> de un país frente al resto de la economía mundial.</p>
+      <ul style="margin:8px 0 8px 18px;padding:0;font-size:12.5px;color:var(--txt2);line-height:1.7">
+        <li><strong>Términos de intercambio</strong> (índice, 2000=100): compara los precios de lo que un país exporta contra los precios de lo que importa. Si el índice cae en el tiempo, el país necesita exportar cada vez más para comprar la misma cantidad de importaciones — es la variable central de la tesis Prebisch-Singer sobre el deterioro secular de los términos de intercambio de los exportadores de materias primas frente a los exportadores de manufacturas.</li>
+        <li><strong>Deuda externa / INB</strong>: saldo de la deuda externa como % del Ingreso Nacional Bruto. Cobertura limitada casi exclusivamente a países de ingreso bajo y medio (el Banco Mundial no reporta este dato para la mayoría de economías de ingreso alto en su base de Estadísticas de Deuda Internacional); un "—" en un país rico no significa que no tenga deuda, sino que esta fuente no lo cubre.</li>
+        <li><strong>Servicio de deuda / exportaciones</strong>: qué porcentaje de los ingresos por exportaciones se destina a pagar intereses y capital de la deuda externa. Es la variable que más directamente conecta con el debate sobre condicionalidad del FMI/Banco Mundial: cuanto mayor, menos margen fiscal le queda al país frente a sus acreedores.</li>
+      </ul>
+      <p>Al seleccionar cualquiera de estos 3 (o cualquier otro indicador de "Función analítica") en un país, el panel lateral muestra <strong>solo ese valor</strong> —no los 4 indicadores principales ni los otros indicadores analíticos a la vez—, junto con su micro-gráfico histórico y un análisis automático de la posición del país (percentil frente a los demás países con dato ese año, tendencia desde el primer año disponible, y una lectura sustantiva del indicador).</p>
+    </div>
+    <div class="help-section" id="t-scatter">
+      <h3>Crecimiento vs. desarrollo humano (dispersión)</h3>
+      <p>Dentro del menú <strong>"Función analítica"</strong>, en la categoría "6. Visualización comparativa", el botón <strong>"Crecimiento vs. desarrollo humano"</strong> abre un gráfico de puntos con el PIB per cápita (escala logarítmica) en el eje horizontal y el IDH en el eje vertical, para el año que tengas seleccionado en la línea de tiempo. El fondo está dividido en 4 cuadrantes (mediana de PIB per cápita × umbral de IDH 0.80) para ubicar de un vistazo a los países con ingreso y desarrollo humano desacoplados. Cada punto es un país, coloreado según su bloque comercial (los mismos colores que el modo "Comercio Internacional"; gris = sin bloque registrado). Pasa el cursor sobre un punto para ver el país, su PIB per cápita y su IDH exactos.</p>
       <p style="margin-top:8px">Este gráfico visualiza directamente una de las tesis centrales de la crítica al desarrollismo liberal: si el crecimiento económico garantizara desarrollo humano equivalente, todos los países caerían sobre una única curva. La dispersión vertical que se observa en la práctica —países con PIB per cápita parecido pero IDH distinto— es evidencia de que el ingreso promedio no determina por sí solo el bienestar, y de que factores estructurales (desigualdad interna, tipo de inserción comercial, gasto social) importan.</p>
     </div>
-    <div class="help-section">
+    <div class="help-section" id="t-trade">
       <h3>Comercio Internacional</h3>
       <p>Cambia el mapa a un modo especial que colorea cada país según el <strong>bloque comercial o de integración económica</strong> al que pertenece (UE, USMCA/T-MEC, Mercosur, ASEAN, AfCFTA, entre otros), en lugar de un indicador numérico. Vuelve a pulsar el botón para regresar al indicador que tenías seleccionado.</p>
       <p>Con este modo activo: pasa el cursor sobre un país para ver su bloque en la etiqueta flotante, o haz clic para fijar en el panel lateral una explicación del bloque (tipo de acuerdo, año de fundación y los demás países miembros). El panel también incluye un botón <strong>"Ver lista completa de bloques"</strong> con la descripción detallada de todos los bloques considerados.</p>
       <p>Si comparas 2 o más países que comparten un bloque comercial, el informe comparativo añade automáticamente un análisis sobre esa relación.</p>
     </div>
-    <div class="help-section">
+    <div class="help-section" style="border-left-color:#4338ca" id="t-centerperiphery">
+      <h3><i class="ti ti-hierarchy-3" style="margin-right:4px;color:#4338ca"></i>Centro-Periferia (Wallerstein)</h3>
+      <p>Cambia el mapa a un segundo modo especial (mutuamente excluyente con "Comercio Internacional") que colorea cada país según su posición en la <strong>teoría de sistemas-mundo</strong> de Immanuel Wallerstein: <span style="color:#1d4ed8;font-weight:700">Centro</span>, <span style="color:#d97706;font-weight:700">Semi-periferia</span> o <span style="color:#b91c1c;font-weight:700">Periferia</span>. Es exactamente la capa de "estructura" del marco estructura-agencia: úsala para anclar visualmente qué condiciones NO controlan los Estados, antes de pasar a los casos donde la agencia estatal modificó esa posición.</p>
+      <p style="margin-top:8px"><strong>Metodología y fuente:</strong> el Centro (25 países) y la Semi-periferia (14 países) siguen la clasificación de <strong>Salvatore Babones (2005)</strong>, <em>"The Country-Level Income Structure of the World-Economy"</em>, Journal of World-Systems Research 11: 29-55 — países que se mantuvieron de forma <strong>consistente en una sola zona durante todo el período 1975-2002</strong>, según la estructura de su PNB per cápita relativa. Todos los demás países del mapa se agrupan aquí como Periferia (incluye tanto a los que Babones clasificó como periferia consistente, como a los que no tuvieron una zona única y estable en ese período).</p>
+      <p style="margin-top:8px"><strong>Limitación importante para tu guión:</strong> por ser una clasificación fija basada en datos de 1975-2002, <strong>China e India aparecen como Periferia</strong> en este mapa, pese a su transformación posterior — no existe una versión "actualizada" de Babones (2005) con la misma metodología. Lejos de ser un defecto que deba ocultarse, esto es útil para tu argumento: es precisamente el tipo de caso que muestra que una posición estructural fijada en un momento histórico no predice por sí sola la trayectoria futura de un país, si media suficiente agencia estatal (Lámina 12 de tu guión). Al mostrar esta capa, vale la pena señalar explícitamente esa tensión en vivo.</p>
+      <p style="margin-top:8px">Con este modo activo: pasa el cursor sobre un país para ver su zona en la etiqueta flotante, o haz clic para fijar en el panel lateral una explicación de esa zona. Las 4 tarjetas de estadísticas sobre el mapa cambian a conteos: países en el Centro, en la Semi-periferia, en la Periferia y el total clasificado.</p>
+    </div>
+    <div class="help-section" id="t-timeline">
       <h3>Línea de tiempo</h3>
-      <p>Arrastra el slider entre 1995 y 2023. El botón ▶ reproduce la evolución automáticamente. Se desactiva solo en el modo Comercio Internacional, ya que los bloques comerciales no varían por año en este mapa.</p>
+      <p>Arrastra el slider entre 1995 y 2023. El botón ▶ reproduce la evolución automáticamente. Se desactiva en los modos "Comercio Internacional" y "Centro-Periferia", ya que ninguno de los dos varía por año en este mapa.</p>
       <p style="margin-top:8px">Debajo del slider hay una fila de <strong>hitos históricos de política y comercio internacional</strong> (creación de la OMC en 1995, crisis asiática de 1997, ingreso de China a la OMC en 2001, crisis financiera global de 2008, pandemia de 2020). Haz clic en cualquiera para saltar directamente a ese año y leer una breve nota de contexto en el título del botón; sirven como referencia para interpretar quiebres o saltos abruptos en los gráficos históricos de cada país.</p>
     </div>
-    <div class="help-section">
+    <div class="help-section" id="t-panel">
       <h3>Panel de país</h3>
       <p>Haz clic en cualquier país para ver sus 4 indicadores y el mini-gráfico histórico. Desde el panel puedes <strong>imprimir una ficha analítica</strong> o <strong>agregarlo a una comparación</strong> con otros países.</p>
       <p>Si el indicador activo es <strong>IDH</strong>, el panel muestra además sus 3 componentes para el país y año seleccionados: esperanza de vida al nacer, años de escolaridad (esperados y promedio) e ingreso nacional bruto per cápita. Estos también aparecen al imprimir la ficha o el informe comparativo.</p>
       <p style="margin-top:8px">También con IDH activo, debajo del mini-gráfico aparece un <strong>Índice de convergencia</strong>: compara la brecha entre el país seleccionado y el promedio de los países de "Desarrollo Muy Alto" (IDH≥0.90) en 1995 frente al año actual, y concluye si esa brecha se redujo (convergencia), se mantuvo o aumentó (divergencia). Es un cálculo simple del mapa —no un indicador oficial del PNUD— pensado para responder de forma rápida a la pregunta doctoral de si existe convergencia o divergencia en desarrollo humano; para un análisis riguroso conviene contrastarlo con literatura especializada en convergencia económica (beta y sigma convergencia).</p>
     </div>
-    <div class="help-section">
+    <div class="help-section" id="t-classification">
       <h3>Clasificación de desarrollo</h3>
       <p>En la sección <strong>"Notas metodológicas"</strong> de la ficha individual y del informe comparativo (que se imprimen desde el panel de país) se incluye una leyenda con el nivel de desarrollo (por ejemplo "Desarrollo Alto" o "Ingreso Medio-Bajo") y su color correspondiente, en la misma escala que usa el mapa (rojo = nivel bajo, verde = nivel alto). Se calcula así, en este orden de prioridad:</p>
       <p style="margin-top:8px"><strong>1. Si el país tiene dato de IDH (PNUD)</strong>, la clasificación se basa en ese valor:</p>
@@ -404,7 +604,7 @@ path.ctry{transition:fill .22s}
       </table>
       <p style="margin-top:8px">Si el país no tiene ni IDH ni PIB per cápita disponibles para el año seleccionado, se muestra como <strong>"Sin clasificación"</strong>. Por eso un mismo país puede aparecer con etiquetas de distinto tipo ("Desarrollo…" vs. "Ingreso…") según qué dato tenga disponible: el IDH siempre tiene prioridad por ser una medida más completa (combina salud, educación e ingreso), y el PIB per cápita se usa solo como respaldo.</p>
     </div>
-    <div class="help-section">
+    <div class="help-section" id="t-report">
       <h3>Informe comparativo</h3>
       <p>Permite comparar entre 2 y 10 países en una sola tabla, con un análisis automático de las diferencias. Para generarlo:</p>
       <ol style="margin:6px 0 8px 18px;padding:0;font-size:12.5px;color:var(--txt2);line-height:1.7">
@@ -415,65 +615,104 @@ path.ctry{transition:fill .22s}
         <li>Se abre una ventana con la tabla comparativa de los 4 indicadores y un análisis automático (quién lidera, brechas, bloques comerciales en común). Desde ahí puedes imprimirlo o guardarlo como PDF con el botón de impresión del navegador.</li>
       </ol>
       <p>El botón "Generar informe comparativo" solo aparece una vez agregado al menos un país a la comparación.</p>
+      <p style="margin-top:8px"><strong>Atajo: "Comparar: Asia Oriental vs. América Latina"</strong> (dentro de "Función analítica"). Precarga de una sola vez Corea del Sur, Singapur, China, Argentina, Brasil y México en el bloque "Comparación de países", listos para generar el informe — pensado para la síntesis comparativa de un guión centro-periferia. Precargar <strong>reemplaza</strong> la lista de comparación que tuvieras en ese momento, pero <strong>no bloquea nada después</strong>: sigue siendo la misma lista editable de siempre, así que puedes quitar cualquiera de los 6 con la × o agregar más países normalmente (hasta 10 en total) antes de generar el informe. Taiwán no se incluye porque ni el Banco Mundial ni el PNUD publican series propias para Taiwán en las fuentes que alimentan este mapa; si lo necesitas para tu exposición, tendrás que documentarlo aparte.</p>
     </div>
-    <div class="help-section">
+    <div class="help-section" id="t-colors">
       <h3>Escala de colores</h3>
-      <p>Rojo = nivel bajo · Verde = nivel alto. En Desempleo y Gini se invierte (verde = bajo desempleo / baja desigualdad = "mejor" en esa lectura). Los tramos se recalculan con los datos reales de cada año.</p>
+      <p>Rojo = nivel bajo · Verde = nivel alto. En Desempleo, Gini, Deuda ext./INB, Serv. deuda/export. y CO₂ per cápita se invierte (verde = valor bajo = "mejor" en esa lectura, ya que en estos indicadores un valor alto se interpreta como una carga o riesgo, no como progreso). Los tramos se recalculan con los datos reales de cada año. Nota: en Términos de intercambio, Gobernanza, I+D e IED recibida, "verde" es simplemente "más alto en el dato crudo" — no implica necesariamente "mejor" en todos los marcos teóricos (por ejemplo, una IED alta puede leerse como integración o como dependencia según el enfoque).</p>
     </div>
 
-    <div class="help-section" style="border-left-color:#7c3aed">
+    <div class="help-section" style="border-left-color:#7c3aed" id="t-limitations">
       <h3><i class="ti ti-school" style="margin-right:4px"></i>Limitaciones para un análisis de política y comercio internacional a nivel doctoral</h3>
       <p>Este mapa fue diseñado como herramienta divulgativa de nivel de vida (IDH/PNUD), no como base de datos de economía política internacional. Si lo vas a usar como fuente secundaria en una tesis o artículo sobre teoría de la dependencia, cadenas globales de valor o relaciones centro-periferia, ten presentes estas limitaciones estructurales:</p>
       <ul style="margin:8px 0 8px 18px;padding:0;font-size:12.5px;color:var(--txt2);line-height:1.7">
-        <li><strong>Todos los indicadores son de "resultado" (nivel de vida).</strong> PIB per cápita, PIB total, IDH, desempleo y Gini describen cómo vive la población de un país, pero ninguno mide su <em>posición estructural</em> en la división internacional del trabajo — qué produce, qué exporta, con cuánto valor agregado y con cuánta dependencia externa. Esa es la variable que el debate centro-periferia (Prebisch, Wallerstein, Cardoso y Faletto) sitúa en el centro del análisis.</li>
+        <li><strong>Los 4 indicadores principales miden "resultado" (nivel de vida); los 10 agrupados en "Función analítica" empiezan a cubrir posición estructural, poder y sostenibilidad.</strong> PIB per cápita, PIB total, IDH y desempleo describen cómo vive la población de un país, pero no dicen nada de su <em>posición</em> en la división internacional del trabajo. El menú "Función analítica" organiza en 5 fases los indicadores que sí apuntan a eso: (1) dependencia estructural — términos de intercambio, deuda externa/INB, servicio de deuda/exportaciones; (2) desigualdad — Gini; (3) gobernanza y poder político — control de la corrupción; (4) innovación y brecha tecnológica — inversión en I+D, IED recibida, exportaciones de alta tecnología, valor agregado manufacturero; (5) sostenibilidad — emisiones de CO₂ per cápita. Sumado a la capa "Centro-Periferia" (Wallerstein/Babones) y al informe comparativo, esto cubre buena parte del corazón del debate centro-periferia sobre tipo de inserción comercial y estructura (Prebisch, Wallerstein, Cardoso y Faletto).</li>
+        <li><strong>La cobertura de la nueva dependencia estructural es desigual entre países.</strong> Deuda externa y servicio de deuda solo están disponibles, por diseño de la fuente, para países de ingreso bajo y medio; la mayoría de economías de ingreso alto no aparecerán con dato en esos dos indicadores. Esto no es un error del mapa, sino un reflejo de qué países reporta el Banco Mundial en sus Estadísticas de Deuda Internacional — y, en sí mismo, es una observación relevante para un análisis centro-periferia (la "deuda externa" como categoría de análisis se aplica casi exclusivamente a la periferia y semi-periferia).</li>
         <li><strong>Desigualdad interna: parcialmente cubierta.</strong> Con la incorporación del coeficiente de Gini el mapa ya no depende solo del IDH (que la oculta por diseño, al usar promedios/medias geométricas). Pero el Gini del Banco Mundial tiene cobertura irregular por país y año — ver la sección "Coeficiente de Gini" más arriba.</li>
         <li><strong>El mapa no distingue tipos de inserción comercial</strong> (exportador de commodities vs. manufacturas vs. servicios), que es la variable explicativa clásica tanto en teoría de la dependencia como en el enfoque de cadenas globales de valor (GVC). El modo "Comercio Internacional" muestra membresías en bloques regionales, pero no la estructura ni composición de lo que cada país efectivamente exporta.</li>
       </ul>
       <p>La sección siguiente detalla, indicador por indicador, qué datos harían falta para cerrar cada una de estas brechas, con sus fuentes primarias exactas — a modo de hoja de ruta para quien quiera ampliar este mapa.</p>
     </div>
 
-    <div class="help-section" style="border-left-color:#7c3aed">
+    <div class="help-section" style="border-left-color:#7c3aed" id="t-roadmap">
       <h3><i class="ti ti-road" style="margin-right:4px"></i>Hoja de ruta de ampliación (no implementado aún)</h3>
       <p style="margin-bottom:8px">Los siguientes indicadores y funcionalidades <strong>no están incluidos en la versión actual del mapa</strong>. Se documentan aquí, con su fuente primaria y código exacto de serie cuando existe, para que sirvan de especificación técnica a quien continúe el desarrollo (incluida una futura versión de esta misma herramienta).</p>
 
-      <p style="margin-top:10px"><strong>1. Dependencia estructural / posición en la economía mundial</strong></p>
-      <table><tr><th>Indicador</th><th>Qué mide</th><th>Fuente primaria</th></tr>
-        <tr><td>Índice de concentración de exportaciones (Herfindahl-Hirschman)</td><td>Si un país depende de 1–2 productos de exportación</td><td>UNCTADstat, "Merchandise trade matrix — product concentration and diversification indices"</td></tr>
-        <tr><td>Términos de intercambio</td><td>Si un país gana o pierde poder adquisitivo internacional en el tiempo</td><td>Banco Mundial, indicador TT.PRI.MRCH.XD.WD (Net barter terms of trade index)</td></tr>
-        <tr><td>Participación en cadenas globales de valor (GVC)</td><td>Integración "hacia atrás" (usa insumos importados) vs. "hacia adelante" (exporta insumos que otros procesan)</td><td>OCDE-OMC, Trade in Value Added (TiVA) database</td></tr>
-        <tr><td>Deuda externa / PIB y servicio de deuda / exportaciones</td><td>Variable central en el debate sobre condicionalidad del FMI/Banco Mundial</td><td>Banco Mundial, International Debt Statistics — DT.DOD.DECT.GN.ZS y DT.TDS.DECT.EX.ZS</td></tr>
+      <p style="margin-top:10px"><strong>1. Dependencia estructural / posición en la economía mundial</strong> <span style="font-weight:400;color:var(--txt2)">— parcialmente incorporada</span></p>
+      <table><tr><th>Indicador</th><th>Qué mide</th><th>Fuente primaria / estado</th></tr>
+        <tr><td>Índice de concentración de exportaciones (Herfindahl-Hirschman)</td><td>Si un país depende de 1–2 productos de exportación</td><td>Pendiente. UNCTADstat, "Merchandise trade matrix — product concentration and diversification indices"; no tiene una API pública con CORS confiable para carga en vivo desde el navegador, a diferencia de los indicadores del Banco Mundial</td></tr>
+        <tr><td>Términos de intercambio</td><td>Si un país gana o pierde poder adquisitivo internacional en el tiempo</td><td><strong>✅ Ya incorporado</strong> — Banco Mundial, TT.PRI.MRCH.XD.WD (Net barter terms of trade index, 2000=100)</td></tr>
+        <tr><td>Participación en cadenas globales de valor (GVC)</td><td>Integración "hacia atrás" (usa insumos importados) vs. "hacia adelante" (exporta insumos que otros procesan)</td><td>Pendiente. OCDE-OMC, Trade in Value Added (TiVA) database — se distribuye como descarga masiva por lotes de años, no como serie anual consultable país por país vía API, por lo que requeriría incorporar datos estáticos como se hizo con el IDH</td></tr>
+        <tr><td>Deuda externa / INB y servicio de deuda / exportaciones</td><td>Variable central en el debate sobre condicionalidad del FMI/Banco Mundial</td><td><strong>✅ Ya incorporado</strong> — Banco Mundial, DT.DOD.DECT.GN.ZS y DT.TDS.DECT.EX.ZS (cobertura limitada a países de ingreso bajo y medio, como corresponde a esta fuente)</td></tr>
       </table>
 
       <p style="margin-top:10px"><strong>2. Desigualdad y bienestar más allá del promedio</strong></p>
+
       <table><tr><th>Indicador</th><th>Qué mide</th><th>Fuente primaria</th></tr>
         <tr><td>Coeficiente de Gini</td><td>Desigualdad de ingresos</td><td><strong>✅ Ya incorporado</strong> — Banco Mundial, SI.POV.GINI</td></tr>
         <tr><td>IDH ajustado por Desigualdad (IDH-D)</td><td>El IDH "descontado" por cuánta desigualdad hay en salud, educación e ingreso</td><td>PNUD, Human Development Report — solo disponible desde ~2010 en adelante; no existe serie completa 1995–2023 para la mayoría de países, a diferencia del IDH estándar</td></tr>
         <tr><td>Índice de Pobreza Multidimensional (IPM)</td><td>Pobreza medida en privaciones simultáneas (salud, educación, nivel de vida), no solo ingreso</td><td>PNUD/OPHI, base de datos global del IPM — se remide cada varios años por país (no es una serie anual), por lo que solo se puede mostrar el dato más reciente disponible por país, nunca una evolución 1995–2023</td></tr>
       </table>
 
-      <p style="margin-top:10px"><strong>3. Gobernanza y poder político</strong></p>
-      <table><tr><th>Indicador</th><th>Qué mide</th><th>Fuente primaria</th></tr>
-        <tr><td>Worldwide Governance Indicators (WGI)</td><td>Estabilidad política, control de la corrupción, calidad regulatoria (6 dimensiones)</td><td>Banco Mundial, WGI — serie anual desde 1996 (bienal hasta 2002)</td></tr>
-        <tr><td>Patrones de alineamiento en votaciones de la ONU</td><td>Bloques geopolíticos y soft power, más allá de los bloques comerciales ya incluidos</td><td>UN General Assembly Voting Data (Harvard Dataverse / Erik Voeten)</td></tr>
-        <tr><td>Ayuda Oficial al Desarrollo (ODA) recibida, % del INB</td><td>Dependencia de asistencia externa</td><td>Banco Mundial / OCDE-CAD, DT.ODA.ODAT.GN.ZS</td></tr>
+      <p style="margin-top:10px"><strong>3. Gobernanza y poder político</strong> <span style="font-weight:400;color:var(--txt2)">— parcialmente incorporada</span></p>
+      <table><tr><th>Indicador</th><th>Qué mide</th><th>Fuente primaria / estado</th></tr>
+        <tr><td>Control de la corrupción (Worldwide Governance Indicators)</td><td>1 de las 6 dimensiones del WGI: captura del Estado por élites privadas</td><td><strong>✅ Ya incorporado</strong> — Banco Mundial, WGI (CC.EST). Las otras 5 dimensiones (estabilidad política, calidad regulatoria, Estado de derecho, voz y rendición de cuentas, efectividad gubernamental) no están incluidas todavía; se podrían agregar con el mismo mecanismo de carga.</td></tr>
+        <tr><td>Patrones de alineamiento en votaciones de la ONU</td><td>Bloques geopolíticos y soft power, más allá de los bloques comerciales ya incluidos</td><td>Pendiente. UN General Assembly Voting Data (Harvard Dataverse / Erik Voeten) — no tiene API pública consultable desde el navegador; requeriría incorporar un dataset estático.</td></tr>
+        <tr><td>Ayuda Oficial al Desarrollo (ODA) recibida, % del INB</td><td>Dependencia de asistencia externa</td><td>Pendiente. Banco Mundial / OCDE-CAD, DT.ODA.ODAT.GN.ZS — código verificado, listo para incorporar con el mismo patrón que los indicadores ya cargados.</td></tr>
       </table>
 
-      <p style="margin-top:10px"><strong>4. Innovación, brecha tecnológica y sostenibilidad</strong></p>
-      <table><tr><th>Indicador</th><th>Qué mide</th><th>Fuente primaria</th></tr>
-        <tr><td>Gasto en I+D (% PIB) y patentes per cápita</td><td>Argumento de "trampa de ingreso medio" y dependencia tecnológica</td><td>Banco Mundial/UNESCO, GB.XPD.RSDV.GD.ZS · WIPO (patentes)</td></tr>
-        <tr><td>Inversión Extranjera Directa (entrada y salida), % PIB</td><td>Grado de apertura e integración de capital</td><td>Banco Mundial, BX.KLT.DINV.WD.GD.ZS / BM.KLT.DINV.WD.GD.ZS</td></tr>
-        <tr><td>Emisiones de CO₂ per cápita e histórico acumulado</td><td>Argumento de "deuda ecológica" del Sur Global hacia el Norte</td><td>Global Carbon Project / Our World in Data</td></tr>
+      <p style="margin-top:10px"><strong>4. Innovación y brecha tecnológica</strong> <span style="font-weight:400;color:var(--txt2)">— parcialmente incorporada</span></p>
+      <table><tr><th>Indicador</th><th>Qué mide</th><th>Fuente primaria / estado</th></tr>
+        <tr><td>Gasto en I+D (% del PIB)</td><td>Argumento de "trampa de ingreso medio" y dependencia tecnológica del centro</td><td><strong>✅ Ya incorporado</strong> — Banco Mundial/UNESCO, GB.XPD.RSDV.GD.ZS</td></tr>
+        <tr><td>Patentes per cápita</td><td>Capacidad de generación de propiedad intelectual propia</td><td>Pendiente. WIPO (Organización Mundial de la Propiedad Intelectual) — requiere cálculo per cápita combinando dos fuentes, no incorporado aún.</td></tr>
+        <tr><td>Inversión Extranjera Directa recibida, % PIB</td><td>Grado de apertura e integración de capital; también leída como dependencia de capital externo</td><td><strong>✅ Ya incorporado</strong> — Banco Mundial, BX.KLT.DINV.WD.GD.ZS (solo entradas netas; la salida de IED, BM.KLT.DINV.WD.GD.ZS, no está incluida)</td></tr>
+        <tr><td>Exportaciones de alta tecnología (% de exportaciones manufactureras)</td><td>Tipo de inserción comercial: distingue exportar tecnología de exportar materias primas o manufacturas básicas — la variable central del argumento centro-periferia sobre valor agregado</td><td><strong>✅ Ya incorporado</strong> — Banco Mundial/Comtrade-WITS, TX.VAL.TECH.MF.ZS</td></tr>
+        <tr><td>Valor agregado manufacturero (% del PIB)</td><td>Grado de industrialización de la economía</td><td><strong>✅ Ya incorporado</strong> — Banco Mundial, NV.IND.MANF.ZS</td></tr>
+      </table>
+
+      <p style="margin-top:10px"><strong>5. Sostenibilidad (debates Norte-Sur)</strong> <span style="font-weight:400;color:var(--txt2)">— parcialmente incorporada</span></p>
+      <table><tr><th>Indicador</th><th>Qué mide</th><th>Fuente primaria / estado</th></tr>
+        <tr><td>Emisiones de CO₂ per cápita (año actual)</td><td>Contribución presente a la crisis climática por habitante</td><td><strong>✅ Ya incorporado</strong> — Banco Mundial / EDGAR-JRC, EN.GHG.CO2.PC.CE.AR5</td></tr>
+        <tr><td>Emisiones de CO₂ acumuladas históricas</td><td>Argumento de "deuda ecológica" del Sur Global hacia el Norte (lo que importa no es solo quién emite hoy, sino quién ha emitido desde la industrialización)</td><td>Pendiente. Global Carbon Project / Our World in Data — el mapa solo muestra el flujo anual, no el acumulado histórico, que es el dato que sostiene específicamente el argumento de deuda ecológica.</td></tr>
       </table>
 
       <p style="margin-top:10px"><strong>5. Análisis y funcionalidades adicionales (no solo datos)</strong></p>
       <table><tr><th>Funcionalidad</th><th>Estado</th></tr>
-        <tr><td>Gráfico de dispersión PIB per cápita vs. IDH, coloreado por bloque comercial</td><td><strong>✅ Ya incorporado</strong> — botón "Dispersión" en la barra superior</td></tr>
+        <tr><td>Gráfico de dispersión PIB per cápita vs. IDH, coloreado por bloque comercial</td><td><strong>✅ Ya incorporado</strong> — botón "Crecimiento vs. desarrollo humano" dentro de "Función analítica"</td></tr>
         <tr><td>Anotaciones históricas en la línea de tiempo (1995 OMC, 1997 crisis asiática, 2001 China-OMC, 2008 crisis financiera, 2020 pandemia)</td><td><strong>✅ Ya incorporado</strong> — fila de hitos bajo el slider</td></tr>
         <tr><td>Índice de convergencia (brecha del país vs. promedio de "Desarrollo Muy Alto", 1995 vs. año actual)</td><td><strong>✅ Ya incorporado</strong> — visible en el panel de país con IDH activo</td></tr>
-        <tr><td>Overlay de clasificación centro / semi-periferia / periferia (Wallerstein), como capa alternativa a "Desarrollo Alto/Medio/Bajo"</td><td>Pendiente. Requiere adoptar una clasificación académica publicada y citable (p. ej. Chase-Dunn, Kentor o Babones) en lugar de una clasificación propia del mapa, para no introducir un juicio de valor no verificable en una herramienta que se usará como fuente doctoral</td></tr>
+        <tr><td>Overlay de clasificación centro / semi-periferia / periferia (Wallerstein), como capa alternativa a "Desarrollo Alto/Medio/Bajo"</td><td><strong>✅ Ya incorporado</strong> — botón "Centro-Periferia", con la lista de países consistentemente clasificados de Babones (2005). Ver limitaciones en la sección dedicada de esta Guía.</td></tr>
+        <tr><td>Comparación precargada Asia Oriental vs. América Latina (Corea del Sur, Singapur, China vs. Argentina, Brasil, México) para la síntesis del guión</td><td><strong>✅ Ya incorporado</strong> — botón "Comparar: Asia Oriental vs. América Latina" dentro de "Función analítica". Taiwán no se incluye: ni el Banco Mundial ni el PNUD publican series propias para Taiwán en las fuentes que usa este mapa.</td></tr>
         <tr><td>Nota metodológica citando fuentes primarias en cada indicador</td><td><strong>✅ Ya incorporado</strong> — ver "Notas metodológicas" en la ficha individual y el informe comparativo</td></tr>
       </table>
       <p style="margin-top:8px;font-size:11px;color:var(--txt2)">Nota técnica: los indicadores del Banco Mundial que ya están en el mapa (PIB per cápita, PIB total, desempleo, Gini) se cargan en tiempo real desde la API pública del Banco Mundial (api.worldbank.org) al abrir esta página, con el mismo patrón de código; añadir un indicador nuevo de esa misma fuente es, en términos de desarrollo, una extensión directa. Los indicadores marcados como "no es una serie anual" arriba (IDH-D, IPM) requieren en cambio incorporar datos estáticos por país (como ya se hace con el IDH, la esperanza de vida y la escolaridad), ya que sus fuentes no publican una API pública con cobertura anual completa.</p>
+    </div>
+
+    <div class="help-section" style="border-left-color:#7c3aed" id="t-references">
+      <h3><i class="ti ti-books" style="margin-right:4px"></i>Referencias y fuentes primarias</h3>
+      <p>Esta Guía hace afirmaciones teóricas (tesis Prebisch-Singer, sistemas-mundo de Wallerstein, condicionalidad del FMI, trampa de ingreso medio, etc.) y afirmaciones de fuente de datos (qué organismo publica cada indicador y con qué código). Ambos tipos de afirmación deben poder verificarse de forma independiente para que este mapa sea citable como fuente secundaria en un trabajo doctoral. Esta tabla reúne las referencias completas; los enlaces marcados <i class="ti ti-external-link"></i> apuntan a la página oficial vigente del organismo (verificada al momento de escribir esta Guía, no un archivo estático).</p>
+      <p style="margin-top:10px"><strong>Marco teórico</strong></p>
+      <table><tr><th>Referencia</th><th>Usada para sustentar</th></tr>
+        <tr><td>Prebisch, R. (1950). <em>The Economic Development of Latin America and Its Principal Problems.</em> Nueva York: Naciones Unidas, CEPAL.</td><td>Tesis del deterioro de los términos de intercambio (sección "Dependencia estructural")</td></tr>
+        <tr><td>Singer, H. W. (1950). "The Distribution of Gains between Investing and Borrowing Countries". <em>American Economic Review</em>, 40(2), 473–485.</td><td>Tesis Prebisch-Singer (formulación independiente y casi simultánea a Prebisch)</td></tr>
+        <tr><td>Wallerstein, I. (1974, 1980, 1989). <em>The Modern World-System</em>, vols. I–III. Nueva York: Academic Press.</td><td>Marco de sistemas-mundo (capa "Centro-Periferia" del mapa)</td></tr>
+        <tr><td>Babones, S. (2005). "The Country-Level Income Structure of the World-Economy". <em>Journal of World-Systems Research</em>, 11(1), 29–55.</td><td>Clasificación específica Centro/Semi-periferia/Periferia usada en el mapa (ver sección dedicada)</td></tr>
+        <tr><td>Cardoso, F. H. y Faletto, E. (1979). <em>Dependency and Development in Latin America.</em> Berkeley: University of California Press.</td><td>Enfoque de dependencia asociada (matiza el estructuralismo de Prebisch con la agencia de actores internos)</td></tr>
+        <tr><td>North, D. C. (1990). <em>Institutions, Institutional Change and Economic Performance.</em> Cambridge University Press.</td><td>Calidad institucional como determinante de desarrollo (sección "Función analítica", fase de gobernanza)</td></tr>
+        <tr><td>Acemoglu, D. y Robinson, J. A. (2012). <em>Why Nations Fail: The Origins of Power, Prosperity, and Poverty.</em> Nueva York: Crown Business.</td><td>Instituciones inclusivas vs. extractivas (misma sección)</td></tr>
+        <tr><td>Gill, I. y Kharas, H. (2007). <em>An East Asian Renaissance: Ideas for Economic Growth.</em> Washington, D.C.: Banco Mundial.</td><td>Origen del término "trampa de ingreso medio" (sección "Función analítica", fase de innovación)</td></tr>
+      </table>
+      <p style="margin-top:10px"><strong>Fuentes primarias de datos</strong></p>
+      <table><tr><th>Organismo / plataforma</th><th>Qué documenta</th><th>Enlace oficial</th></tr>
+        <tr><td>Banco Mundial — World Development Indicators (WDI)</td><td>Metadatos y definición exacta de cada código de serie usado en el mapa (NY.GDP.PCAP.CD, SI.POV.GINI, TT.PRI.MRCH.XD.WD, DT.DOD.DECT.GN.ZS, etc.)</td><td><a href="https://data.worldbank.org/indicator" target="_blank" rel="noopener">data.worldbank.org/indicator <i class="ti ti-external-link"></i></a></td></tr>
+        <tr><td>PNUD — Human Development Reports, Data Center</td><td>Notas técnicas y descargas de la serie histórica del IDH y del IDH-D</td><td><a href="https://hdr.undp.org/data-center/documentation-and-downloads" target="_blank" rel="noopener">hdr.undp.org/data-center/documentation-and-downloads <i class="ti ti-external-link"></i></a></td></tr>
+        <tr><td>Banco Mundial — Worldwide Governance Indicators (WGI)</td><td>Metodología completa de las 6 dimensiones de gobernanza y de qué fuentes se componen</td><td><a href="https://www.worldbank.org/en/publication/worldwide-governance-indicators/documentation" target="_blank" rel="noopener">worldbank.org/.../worldwide-governance-indicators <i class="ti ti-external-link"></i></a></td></tr>
+        <tr><td>FMI — "IMF Conditionality"</td><td>Definición oficial de condicionalidad, citada al explicar deuda externa y servicio de deuda</td><td><a href="https://www.imf.org/en/about/factsheets/sheets/2023/imf-conditionality" target="_blank" rel="noopener">imf.org/.../imf-conditionality <i class="ti ti-external-link"></i></a></td></tr>
+        <tr><td>OCDE — Trade in Value Added (TiVA)</td><td>Base de datos de cadenas globales de valor mencionada en la Hoja de ruta como pendiente de incorporar</td><td><a href="https://www.oecd.org/en/topics/sub-issues/trade-in-value-added.html" target="_blank" rel="noopener">oecd.org/.../trade-in-value-added <i class="ti ti-external-link"></i></a></td></tr>
+        <tr><td>UNCTAD — UNCTADstat Data Centre</td><td>Índices de concentración/diversificación de exportaciones mencionados en la Hoja de ruta como pendientes</td><td><a href="https://unctadstat.unctad.org/" target="_blank" rel="noopener">unctadstat.unctad.org <i class="ti ti-external-link"></i></a></td></tr>
+      </table>
+      <p style="margin-top:8px;font-size:11px;color:var(--txt2)">Para cada indicador individual del mapa, el código de serie exacto (por ejemplo <code>SI.POV.GINI</code>) aparece también en su descripción emergente al pasar el cursor sobre el botón, y en las notas metodológicas de la ficha de país y del informe comparativo — ese código es lo que debes buscar en data.worldbank.org/indicator para verificar la definición completa, cobertura y metodología de cálculo publicadas por la fuente original.</p>
+    </div>
     </div>
   </div>
 </div>
@@ -493,11 +732,14 @@ path.ctry{transition:fill .22s}
   <div id="scatter-modal">
     <button id="scatter-close">×</button>
     <h2><i class="ti ti-chart-dots" style="vertical-align:middle;margin-right:6px"></i>PIB per cápita vs. Desarrollo Humano</h2>
-    <p style="font-size:12.5px;color:var(--txt2);line-height:1.6;margin-bottom:6px">Cada punto es un país en el año actualmente seleccionado en la línea de tiempo (<span id="scatter-year">—</span>). El eje horizontal usa escala logarítmica porque el PIB per cápita varía en varios órdenes de magnitud entre países. El color indica el bloque comercial al que pertenece cada país (gris = sin bloque registrado en este mapa).</p>
-    <svg id="scatter-svg" width="100%" viewBox="0 0 720 460" style="display:block"></svg>
+    <p style="font-size:12.5px;color:var(--txt2);line-height:1.6;margin-bottom:6px">Cada punto es un país en el año actualmente seleccionado en la línea de tiempo (<span id="scatter-year">—</span>). El fondo divide el gráfico en 4 cuadrantes usando la mediana de PIB per cápita y el umbral de IDH ≥0.80 ("desarrollo muy alto" del PNUD), para leer de un vistazo quién combina ingreso y desarrollo humano — y quién no. El color indica el bloque comercial al que pertenece cada país (gris = sin bloque registrado en este mapa). Pasa el cursor (o toca) un punto para ver el detalle.</p>
+    <div style="position:relative">
+      <svg id="scatter-svg" width="100%" viewBox="0 0 720 460" style="display:block"></svg>
+      <div id="scatter-tt"></div>
+    </div>
     <div id="scatter-legend"></div>
     <div id="scatter-note">
-      <strong>Cómo leerlo para un argumento centro-periferia:</strong> si crecimiento económico e IDH fueran equivalentes, todos los puntos caerían sobre una única curva ascendente. En la práctica, países con PIB per cápita similar pueden tener IDH muy distinto (y viceversa) — esa dispersión vertical es evidencia de que el ingreso promedio no garantiza desarrollo humano equivalente, uno de los argumentos centrales frente a la lectura puramente liberal del desarrollo.
+      <strong>Cómo leerlo para un argumento centro-periferia:</strong> si crecimiento económico e IDH fueran equivalentes, todos los puntos caerían sobre una única curva ascendente y los cuadrantes izquierdo-superior y derecho-inferior estarían vacíos. En la práctica, países con PIB per cápita similar pueden tener IDH muy distinto (y viceversa) — esa dispersión entre cuadrantes es evidencia de que el ingreso promedio no garantiza desarrollo humano equivalente, uno de los argumentos centrales frente a la lectura puramente liberal del desarrollo.
     </div>
   </div>
 </div>
@@ -559,14 +801,23 @@ const INDS={
   gdp:{lbl:"PIB total (miles M USD)",short:"PIB total",fmt:v=>"$"+v.toFixed(1)+"B",invert:false,unit:"miles M USD"},
   hdi:{lbl:"Índice de Desarrollo Humano",short:"IDH",fmt:v=>v.toFixed(3),invert:false,unit:"0–1"},
   unemp:{lbl:"Desempleo (%)",short:"Desempleo",fmt:v=>v.toFixed(1)+"%",invert:true,unit:"%"},
-  gini:{lbl:"Coeficiente de Gini (desigualdad de ingresos)",short:"Gini",fmt:v=>v.toFixed(1),invert:true,unit:"0–100"}
+  gini:{lbl:"Coeficiente de Gini (desigualdad de ingresos)",short:"Gini",fmt:v=>v.toFixed(1),invert:true,unit:"0–100"},
+  tot:{lbl:"Términos de intercambio (índice, 2000=100)",short:"Términos interc.",fmt:v=>v.toFixed(1),invert:false,unit:"índice"},
+  debtgni:{lbl:"Deuda externa (% del INB)",short:"Deuda ext./INB",fmt:v=>v.toFixed(1)+"%",invert:true,unit:"%"},
+  debtserv:{lbl:"Servicio de deuda (% de exportaciones)",short:"Serv. deuda/export.",fmt:v=>v.toFixed(1)+"%",invert:true,unit:"%"},
+  gov:{lbl:"Control de la corrupción (gobernanza)",short:"Gobernanza",fmt:v=>v.toFixed(2),invert:false,unit:"-2.5 a 2.5"},
+  rnd:{lbl:"Inversión en I+D (% del PIB)",short:"I+D",fmt:v=>v.toFixed(2)+"%",invert:false,unit:"%"},
+  fdi:{lbl:"Inversión Extranjera Directa recibida (% del PIB)",short:"IED recibida",fmt:v=>v.toFixed(1)+"%",invert:false,unit:"%"},
+  co2:{lbl:"Emisiones de CO₂ (t per cápita)",short:"CO₂ per cápita",fmt:v=>v.toFixed(1)+" t",invert:true,unit:"t CO₂e"},
+  hitech:{lbl:"Exportaciones de alta tecnología (% de export. manufactureras)",short:"Export. alta tecnología",fmt:v=>v.toFixed(1)+"%",invert:false,unit:"%"},
+  manuf:{lbl:"Valor agregado manufacturero (% del PIB)",short:"Valor agr. manufacturero",fmt:v=>v.toFixed(1)+"%",invert:false,unit:"%"}
 };
-const DATA={gdp_pc:{},gdp:{},hdi:{},unemp:{},le:{},eys:{},mys:{},gnipc:{},gini:{}};
+const DATA={gdp_pc:{},gdp:{},hdi:{},unemp:{},le:{},eys:{},mys:{},gnipc:{},gini:{},tot:{},debtgni:{},debtserv:{},gov:{},rnd:{},fdi:{},co2:{},hitech:{},manuf:{}};
 const COUNTRY_NAMES_ES={AFG:"Afganistán",AGO:"Angola",ALB:"Albania",AND:"Andorra",ARE:"Emiratos Árabes Unidos",ARG:"Argentina",ARM:"Armenia",ATG:"Antigua y Barbuda",AUS:"Australia",AUT:"Austria",AZE:"Azerbaiyán",BDI:"Burundi",BEL:"Bélgica",BEN:"Benín",BFA:"Burkina Faso",BGD:"Bangladés",BGR:"Bulgaria",BHR:"Baréin",BHS:"Bahamas",BIH:"Bosnia y Herzegovina",BLR:"Bielorrusia",BLZ:"Belice",BMU:"Bermudas",BOL:"Bolivia",BRA:"Brasil",BRN:"Brunéi",BTN:"Bután",BWA:"Botsuana",CAF:"República Centroafricana",CAN:"Canadá",CHE:"Suiza",CHL:"Chile",CHN:"China",CIV:"Costa de Marfil",CMR:"Camerún",COD:"R.D. del Congo",COG:"República del Congo",COL:"Colombia",COM:"Comoras",CPV:"Cabo Verde",CRI:"Costa Rica",CUB:"Cuba",CYP:"Chipre",CZE:"Chequia",DEU:"Alemania",DJI:"Yibuti",DNK:"Dinamarca",DOM:"República Dominicana",DZA:"Argelia",ECU:"Ecuador",EGY:"Egipto",ERI:"Eritrea",ESP:"España",EST:"Estonia",ETH:"Etiopía",FIN:"Finlandia",FRA:"Francia",GAB:"Gabón",GBR:"Reino Unido",GEO:"Georgia",GHA:"Ghana",GIN:"Guinea",GMB:"Gambia",GNQ:"Guinea Ecuatorial",GRC:"Grecia",GRD:"Granada",GTM:"Guatemala",GUY:"Guyana",HKG:"Hong Kong",HND:"Honduras",HRV:"Croacia",HTI:"Haití",HUN:"Hungría",IDN:"Indonesia",IND:"India",IRL:"Irlanda",IRN:"Irán",IRQ:"Irak",ISL:"Islandia",ISR:"Israel",ITA:"Italia",JAM:"Jamaica",JOR:"Jordania",JPN:"Japón",KAZ:"Kazajistán",KEN:"Kenia",KGZ:"Kirguistán",KHM:"Camboya",KNA:"San Cristóbal y Nieves",KOR:"Corea del Sur",KWT:"Kuwait",LAO:"Laos",LBN:"Líbano",LBR:"Liberia",LBY:"Libia",LCA:"Santa Lucía",LKA:"Sri Lanka",LSO:"Lesoto",LTU:"Lituania",LUX:"Luxemburgo",LVA:"Letonia",MAR:"Marruecos",MDA:"Moldavia",MDG:"Madagascar",MDV:"Maldivas",MEX:"México",MKD:"Macedonia del Norte",MLI:"Malí",MLT:"Malta",MMR:"Myanmar",MNE:"Montenegro",MNG:"Mongolia",MNP:"Islas Marianas del Norte",MOZ:"Mozambique",MRT:"Mauritania",MWI:"Malaui",MYS:"Malasia",NAM:"Namibia",NCL:"Nueva Caledonia",NER:"Níger",NGA:"Nigeria",NIC:"Nicaragua",NLD:"Países Bajos",NOR:"Noruega",NPL:"Nepal",NRU:"Nauru",NZL:"Nueva Zelanda",OMN:"Omán",PAK:"Pakistán",PAN:"Panamá",PER:"Perú",PHL:"Filipinas",PNG:"Papúa Nueva Guinea",POL:"Polonia",PRI:"Puerto Rico",PRK:"Corea del Norte",PRT:"Portugal",PRY:"Paraguay",PSE:"Palestina",QAT:"Catar",ROU:"Rumania",RUS:"Rusia",RWA:"Ruanda",SAU:"Arabia Saudita",SDN:"Sudán",SEN:"Senegal",SLE:"Sierra Leona",SLV:"El Salvador",SOM:"Somalia",SRB:"Serbia",SSD:"Sudán del Sur",STP:"Santo Tomé y Príncipe",SUR:"Surinam",SVK:"Eslovaquia",SVN:"Eslovenia",SWE:"Suecia",SWZ:"Esuatini",SYR:"Siria",TCD:"Chad",TGO:"Togo",THA:"Tailandia",TJK:"Tayikistán",TKM:"Turkmenistán",TLS:"Timor Oriental",TON:"Tonga",TTO:"Trinidad y Tobago",TUN:"Túnez",TUR:"Turquía",TZA:"Tanzania",UGA:"Uganda",UKR:"Ucrania",URY:"Uruguay",USA:"Estados Unidos",UZB:"Uzbekistán",VCT:"San Vicente y las Granadinas",VEN:"Venezuela",VNM:"Vietnam",VUT:"Vanuatu",WLF:"Wallis y Futuna",WSM:"Samoa",YEM:"Yemen",ZAF:"Sudáfrica",ZMB:"Zambia",ZWE:"Zimbabue"};
 const NAMES={};Object.keys(COUNTRY_NAMES_ES).forEach(function(k){NAMES[k]=COUNTRY_NAMES_ES[k];});
 const compareList=[];
 let feats=[],cInd="gdp_pc",cYi=28,play=false,tim=null,curCode=null,curBreaks=null,prevInd="gdp_pc",lastTradeHover=null;
-let loadedFlags={gdp_pc:false,gdp:false,hdi:true,unemp:false,gini:false};
+let loadedFlags={gdp_pc:false,gdp:false,hdi:true,unemp:false,gini:false,tot:false,debtgni:false,debtserv:false,gov:false,rnd:false,fdi:false,co2:false,hitech:false,manuf:false};
 
 // ═══════════════════════════════════════════════
 // UTILS
@@ -587,7 +838,7 @@ const mapcol=document.getElementById("mapinner");
 const ttEl=document.getElementById("tt");
 
 function updateYearControlState(){
-  const isStatic = cInd === "trade";
+  const isStatic = cInd === "trade" || cInd === "periphery";
   const sldr = document.getElementById("ysldr");
   const pbtn = document.getElementById("pbtn");
   const note = document.getElementById("yctrl-note");
@@ -601,32 +852,53 @@ function updateYearControlState(){
   }
 }
 
-function setStatLabels(trade){
-  document.getElementById("lbl1").innerHTML=trade?'<i class="ti ti-world"></i>Países en bloques':'<i class="ti ti-world"></i>Países con datos';
-  document.getElementById("lbl2").innerHTML=trade?'<i class="ti ti-stack-2"></i>Bloques comerciales':'<i class="ti ti-chart-bar"></i>Promedio global';
-  document.getElementById("lbl3").innerHTML=trade?'<i class="ti ti-building-bank"></i>Bloque actual':'<i class="ti ti-arrow-up"></i>Máximo';
-  document.getElementById("lbl4").innerHTML=trade?'<i class="ti ti-users"></i>Países en el bloque':'<i class="ti ti-arrow-down"></i>Mínimo';
+function setStatLabels(mode){
+  if(mode==="trade"){
+    document.getElementById("lbl1").innerHTML='<i class="ti ti-world"></i>Países en bloques';
+    document.getElementById("lbl2").innerHTML='<i class="ti ti-stack-2"></i>Bloques comerciales';
+    document.getElementById("lbl3").innerHTML='<i class="ti ti-building-bank"></i>Bloque actual';
+    document.getElementById("lbl4").innerHTML='<i class="ti ti-users"></i>Países en el bloque';
+  }else if(mode==="periphery"){
+    document.getElementById("lbl1").innerHTML='<i class="ti ti-square-rotated"></i>Países Centro';
+    document.getElementById("lbl2").innerHTML='<i class="ti ti-square-rotated"></i>Países Semi-periferia';
+    document.getElementById("lbl3").innerHTML='<i class="ti ti-square-rotated"></i>Países Periferia';
+    document.getElementById("lbl4").innerHTML='<i class="ti ti-world"></i>Total clasificado';
+  }else{
+    document.getElementById("lbl1").innerHTML='<i class="ti ti-world"></i>Países con datos';
+    document.getElementById("lbl2").innerHTML='<i class="ti ti-chart-bar"></i>Promedio global';
+    document.getElementById("lbl3").innerHTML='<i class="ti ti-arrow-up"></i>Máximo';
+    document.getElementById("lbl4").innerHTML='<i class="ti ti-arrow-down"></i>Mínimo';
+  }
 }
 
 function updMap(){
-  document.getElementById("ydsp").textContent=cInd==="trade"?"—":YRS[cYi];
+  document.getElementById("ydsp").textContent=(cInd==="trade"||cInd==="periphery")?"—":YRS[cYi];
   document.getElementById("ysldr").value=cYi;
   updateYearControlState();
   updateTimelineAnnotHighlight();
   if(cInd==="trade"){
-    setStatLabels(true);
+    setStatLabels("trade");
     applyTradeMap();
     if(curCode)showTradePop(curCode);else clearTradePop();
     syncCompareBtnState();
     return;
   }
-  setStatLabels(false);
+  if(cInd==="periphery"){
+    setStatLabels("periphery");
+    applyPeripheryMap();
+    if(curCode)showPeripheryPop(curCode);else clearPeripheryPop();
+    syncCompareBtnState();
+    return;
+  }
+  setStatLabels("indicator");
   restorePopMetrics();
   const ind=INDS[cInd];
   const cl=ind.invert?CL_I:CL_N;
-  const vals=[];
-  feats.forEach(f=>{const v=gv(f.a3);if(v!=null)vals.push(v);});
-  const sorted=vals.slice().sort((a,b)=>a-b);
+  const pairs=[];
+  feats.forEach(f=>{const v=gv(f.a3);if(v!=null&&f.a3)pairs.push({code:f.a3,v});});
+  pairs.sort((a,b)=>a.v-b.v);
+  const vals=pairs.map(p=>p.v);
+  const sorted=vals;
   curBreaks=sorted.length?computeBreaks(sorted):null;
   msvg.selectAll("path.ctry").each(function(d){
     const v=gv(d.a3);
@@ -634,10 +906,11 @@ function updMap(){
     d3.select(this).classed("ctry-nodata",false).attr("fill",bucketColor(v,curBreaks,cl));
   });
   if(sorted.length){
+    const maxP=pairs[pairs.length-1],minP=pairs[0];
     document.getElementById("s1").textContent=sorted.length;
     document.getElementById("s2").textContent=ind.fmt(vals.reduce((a,b)=>a+b,0)/vals.length);
-    document.getElementById("s3").textContent=ind.fmt(sorted[sorted.length-1]);
-    document.getElementById("s4").textContent=ind.fmt(sorted[0]);
+    document.getElementById("s3").innerHTML=ind.fmt(maxP.v)+`<span class="sv-country">${getName(maxP.code)}</span>`;
+    document.getElementById("s4").innerHTML=ind.fmt(minP.v)+`<span class="sv-country">${getName(minP.code)}</span>`;
   }else{["s1","s2","s3","s4"].forEach(id=>document.getElementById(id).textContent="—");}
   bldLeg(sorted,cl,ind);
   if(curCode)showPop(curCode,false);
@@ -656,8 +929,12 @@ function bldLeg(sorted,cl,ind){
 // ═══════════════════════════════════════════════
 // SIDE PANEL
 // ═══════════════════════════════════════════════
+// SIDE PANEL
+// ═══════════════════════════════════════════════
 function restorePopMetrics(){
-  document.getElementById("pmetrics").style.display="grid";
+  const isAnalytic=ANALYTICS_KEYS.includes(cInd);
+  document.getElementById("pmetrics").style.display=isAnalytic?"none":"grid";
+  document.getElementById("analytic-metric").style.display=isAnalytic?"grid":"none";
   document.getElementById("ps").style.display="block";
   document.getElementById("psvg").style.display="block";
   const bi=document.getElementById("bloc-info");
@@ -678,12 +955,18 @@ function showPop(code, updateButtons){
     document.getElementById("compare-btn").style.display="flex";
   }
   syncCompareBtnState();
-  const pcV=gv(code,"gdp_pc"),totV=gv(code,"gdp"),hdiV=gv(code,"hdi"),unV=gv(code,"unemp"),giniV=gv(code,"gini");
-  document.getElementById("m1").textContent=pcV!=null?INDS.gdp_pc.fmt(pcV):"—";
-  document.getElementById("m2").textContent=totV!=null?INDS.gdp.fmt(totV):"—";
-  document.getElementById("m3").textContent=hdiV!=null?INDS.hdi.fmt(hdiV):"—";
-  document.getElementById("m4").textContent=unV!=null?INDS.unemp.fmt(unV):"—";
-  document.getElementById("m5").textContent=giniV!=null?INDS.gini.fmt(giniV):"—";
+  const isAnalytic=ANALYTICS_KEYS.includes(cInd);
+  if(isAnalytic){
+    const av=gv(code,cInd);
+    document.getElementById("am-lbl").innerHTML=`<i class="ti ti-layout-grid"></i>${ind.lbl}`;
+    document.getElementById("am-val").textContent=av!=null?ind.fmt(av):"—";
+  }else{
+    const pcV=gv(code,"gdp_pc"),totV=gv(code,"gdp"),hdiV=gv(code,"hdi"),unV=gv(code,"unemp");
+    document.getElementById("m1").textContent=pcV!=null?INDS.gdp_pc.fmt(pcV):"—";
+    document.getElementById("m2").textContent=totV!=null?INDS.gdp.fmt(totV):"—";
+    document.getElementById("m3").textContent=hdiV!=null?INDS.hdi.fmt(hdiV):"—";
+    document.getElementById("m4").textContent=unV!=null?INDS.unemp.fmt(unV):"—";
+  }
   const hcBox=document.getElementById("hdi-components");
   if(cInd==="hdi"){
     const leV=gv(code,"le"),eysV=gv(code,"eys"),mysV=gv(code,"mys"),gnipcV=gv(code,"gnipc");
@@ -696,8 +979,78 @@ function showPop(code, updateButtons){
     hcBox.style.display="none";
   }
   drawMiniChart(code,ind);
-  renderTransitionNote(code);
-  renderConvergence(code);
+  if(isAnalytic){
+    renderAnalyticsAnalysis(code);
+    const ptrendEl=document.getElementById("ptrend");
+    if(ptrendEl){ptrendEl.className="";ptrendEl.style.display="none";ptrendEl.innerHTML="";}
+    const cvBox=document.getElementById("convergence-box");
+    if(cvBox)cvBox.style.display="none";
+  }else{
+    const amA=document.getElementById("am-analysis");
+    if(amA){amA.style.display="none";amA.innerHTML="";}
+    renderTransitionNote(code);
+    renderConvergence(code);
+  }
+}
+
+// ═══════════════════════════════════════════════
+// ANÁLISIS AUTOMÁTICO POR PAÍS PARA CADA INDICADOR
+// DE "FUNCIÓN ANALÍTICA": posición relativa (percentil
+// entre países con dato ese año) + tendencia histórica +
+// lectura sustantiva del indicador.
+// ═══════════════════════════════════════════════
+const ANALYTICS_INSIGHT={
+  tot:{high:"gana poder adquisitivo frente al resto del mundo: sus exportaciones compran más importaciones que antes.",low:"pierde poder adquisitivo frente al resto del mundo: necesita exportar más para comprar las mismas importaciones — el patrón que describe la tesis Prebisch-Singer para economías exportadoras de materias primas."},
+  debtgni:{high:"tiene un peso de deuda externa alto en relación con su ingreso nacional, lo que puede limitar su margen de política económica frente a acreedores externos.",low:"tiene un peso de deuda externa comparativamente bajo en relación con su ingreso nacional."},
+  debtserv:{high:"destina una parte considerable de sus ingresos por exportaciones al pago de deuda externa, dejando menos margen fiscal para otras prioridades.",low:"destina una parte comparativamente baja de sus ingresos por exportaciones al pago de deuda externa."},
+  gini:{high:"tiene una distribución del ingreso muy desigual — un dato que el PIB per cápita y el IDH no capturan por sí solos.",low:"tiene una distribución del ingreso relativamente igualitaria en comparación con el resto del mundo."},
+  gov:{high:"muestra un control de la corrupción comparativamente fuerte según la percepción de expertos y encuestados.",low:"muestra un control de la corrupción comparativamente débil, lo que en la literatura institucionalista (North, Acemoglu-Robinson) suele asociarse con menor capacidad de un país para capturar valor de su integración a la economía mundial."},
+  rnd:{high:"invierte una proporción comparativamente alta de su PIB en investigación y desarrollo.",low:"invierte una proporción comparativamente baja de su PIB en investigación y desarrollo — una variable clave en el debate sobre la 'trampa de ingreso medio'."},
+  fdi:{high:"recibe un flujo comparativamente alto de inversión extranjera directa en relación con el tamaño de su economía.",low:"recibe un flujo comparativamente bajo de inversión extranjera directa en relación con el tamaño de su economía."},
+  co2:{high:"tiene una huella de carbono por habitante comparativamente alta.",low:"tiene una huella de carbono por habitante comparativamente baja — aunque esto no equivale por sí solo al argumento de deuda ecológica histórica, que depende de emisiones acumuladas."},
+  hitech:{high:"exporta una proporción comparativamente alta de manufacturas de alta tecnología (aeroespacial, electrónica, farmacéutica) — el tipo de inserción comercial asociado a los países que lograron 'subir de escalón' en la división internacional del trabajo.",low:"exporta una proporción comparativamente baja de manufacturas de alta tecnología, lo que sugiere una inserción comercial más orientada a bienes de menor valor agregado (materias primas o manufacturas básicas) — el patrón que la teoría centro-periferia asocia con la posición periférica."},
+  manuf:{high:"tiene un sector manufacturero comparativamente grande como parte de su economía, indicio de un proceso de industrialización más avanzado.",low:"tiene un sector manufacturero comparativamente pequeño como parte de su economía, lo que puede reflejar una estructura productiva más dependiente de servicios, materias primas o rentas extractivas."}
+};
+function renderAnalyticsAnalysis(code){
+  const el=document.getElementById("am-analysis");
+  if(!el)return;
+  if(!ANALYTICS_KEYS.includes(cInd)){el.style.display="none";el.innerHTML="";return;}
+  const ind=INDS[cInd];
+  const v=gv(code,cInd);
+  const name=getName(code);
+  if(v==null){
+    el.style.display="block";
+    el.innerHTML=`Sin dato de "${ind.short}" disponible para ${name} en ${YRS[cYi]}. Esto es frecuente en este indicador: consulta la nota de cobertura en la Guía.`;
+    return;
+  }
+  const allVals=[];
+  feats.forEach(f=>{if(!f.a3)return;const vv=gv(f.a3,cInd,cYi);if(vv!=null)allVals.push(vv);});
+  allVals.sort((a,b)=>a-b);
+  const rank=allVals.filter(x=>x<=v).length;
+  const pct=Math.round((rank/allVals.length)*100);
+  let posText;
+  if(pct>=75)posText="se ubica en el 25% más alto";
+  else if(pct>=50)posText="se ubica por encima de la mediana mundial";
+  else if(pct>=25)posText="se ubica por debajo de la mediana mundial";
+  else posText="se ubica en el 25% más bajo";
+  const insight=ANALYTICS_INSIGHT[cInd];
+  const qualitative=pct>=50?insight.high:insight.low;
+  let trendText="";
+  const arr=DATA[cInd][code];
+  if(arr){
+    const firstIdx=arr.findIndex(x=>x!=null);
+    if(firstIdx>=0&&firstIdx<cYi&&arr[firstIdx]!=null){
+      const firstV=arr[firstIdx];
+      const dir=v>firstV?"aumentó":v<firstV?"disminuyó":"se mantuvo estable";
+      trendText=` Entre ${YRS[firstIdx]} y ${YRS[cYi]} pasó de ${ind.fmt(firstV)} a ${ind.fmt(v)} (${dir}).`;
+    }
+  }
+  el.style.display="block";
+  el.innerHTML=`<strong><i class="ti ti-notes" style="margin-right:4px"></i>Análisis para ${name}</strong><br>`
+    +`Con ${ind.fmt(v)} en ${YRS[cYi]}, ${name} ${posText} de los ${allVals.length} países con dato disponible este año (percentil ~${pct}).`
+    +trendText
+    +` En términos sustantivos, esto sugiere que el país ${qualitative}`
+    +`<div style="font-size:9.5px;color:var(--txt2);margin-top:4px">Percentil calculado solo entre países con dato disponible en ${YRS[cYi]}; es un cálculo del mapa, no una cifra oficial de la fuente primaria.</div>`;
 }
 
 // ═══════════════════════════════════════════════
@@ -793,21 +1146,52 @@ document.querySelectorAll(".ibtn, #trade-btn").forEach(btn=>{
 // ═══════════════════════════════════════════════
 // INDICATOR BUTTONS
 // ═══════════════════════════════════════════════
-document.querySelectorAll(".ibtn").forEach(b=>{
+const ANALYTICS_KEYS=["tot","debtgni","debtserv","gini","gov","rnd","fdi","co2","hitech","manuf"];
+function syncAnalyticsPillState(){
+  const pill=document.getElementById("analytics-btn");
+  if(!pill)return;
+  pill.classList.toggle("has-active",ANALYTICS_KEYS.includes(cInd));
+}
+document.querySelectorAll(".ibtn[data-k]").forEach(b=>{
   b.onclick=()=>{
-    document.querySelectorAll(".ibtn").forEach(x=>x.classList.remove("on"));
+    document.querySelectorAll(".ibtn[data-k]").forEach(x=>x.classList.remove("on"));
     b.classList.add("on");
     document.getElementById("trade-btn").classList.remove("on");
+    document.getElementById("periphery-btn").classList.remove("on");
     cInd=b.dataset.k;prevInd=cInd;updMap();
+    syncAnalyticsPillState();
+    if(ANALYTICS_KEYS.includes(cInd))closeAnalyticsPanel();
   };
 });
+
+// ═══════════════════════════════════════════════
+// "FUNCIÓN ANALÍTICA" DROPDOWN (groups the 5
+// analytical-indicator categories into one menu)
+// ═══════════════════════════════════════════════
+function closeAnalyticsPanel(){
+  document.getElementById("analytics-panel").classList.remove("show");
+  document.getElementById("analytics-btn").classList.remove("on");
+  document.getElementById("analytics-btn").setAttribute("aria-expanded","false");
+}
+function toggleAnalyticsPanel(){
+  const panel=document.getElementById("analytics-panel");
+  const btn=document.getElementById("analytics-btn");
+  const willOpen=!panel.classList.contains("show");
+  panel.classList.toggle("show",willOpen);
+  btn.classList.toggle("on",willOpen);
+  btn.setAttribute("aria-expanded",willOpen?"true":"false");
+}
+document.getElementById("analytics-btn").onclick=(e)=>{e.stopPropagation();toggleAnalyticsPanel();};
+document.getElementById("analytics-panel").addEventListener("click",e=>e.stopPropagation());
+document.addEventListener("click",()=>closeAnalyticsPanel());
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeAnalyticsPanel();});
 
 // ═══════════════════════════════════════════════
 // YEAR CONTROL
 // ═══════════════════════════════════════════════
 document.getElementById("ysldr").oninput=e=>{cYi=+e.target.value;updMap();};
 document.getElementById("pbtn").onclick=()=>{
-  if(cInd==="trade")return;
+  if(cInd==="trade"||cInd==="periphery")return;
   if(play){clearInterval(tim);play=false;document.getElementById("pbtn").innerHTML='<i class="ti ti-player-play"></i>';}
   else{
     play=true;document.getElementById("pbtn").innerHTML='<i class="ti ti-player-pause"></i>';
@@ -824,7 +1208,10 @@ document.getElementById("pc-btn").onclick=()=>{
   document.getElementById("pc-btn").style.display="none";
   document.getElementById("pt").textContent="Selecciona un país en el mapa";
   document.getElementById("ps").innerHTML="&nbsp;";
-  ["m1","m2","m3","m4","m5"].forEach(id=>document.getElementById(id).textContent="—");
+  ["m1","m2","m3","m4"].forEach(id=>document.getElementById(id).textContent="—");
+  document.getElementById("am-val").textContent="—";
+  const amA=document.getElementById("am-analysis");
+  if(amA){amA.style.display="none";amA.innerHTML="";}
   d3.select("#psvg").selectAll("*").remove();
   document.getElementById("print-btn").style.display="none";
   document.getElementById("compare-btn").style.display="none";
@@ -886,6 +1273,26 @@ document.getElementById("compare-btn").onclick=function(){
 };
 document.getElementById("compare-close").onclick=()=>{
   compareList.length=0;renderCompareList();
+};
+
+// ═══════════════════════════════════════════════
+// COMPARACIÓN PRECARGADA: Asia Oriental vs. América
+// Latina, para la síntesis comparativa del guión
+// (Lámina 13). Reemplaza el contenido actual de
+// compareList con el set predefinido — no bloquea
+// nada: se puede seguir agregando o quitando países
+// normalmente después, con los mismos controles.
+// Nota: Taiwán no está incluido porque ni el Banco
+// Mundial ni el PNUD publican series propias para
+// Taiwán en los datasets que alimentan este mapa.
+// ═══════════════════════════════════════════════
+document.getElementById("preload-compare-btn").onclick=function(){
+  closeAnalyticsPanel();
+  compareList.length=0;
+  ["KOR","SGP","CHN","ARG","BRA","MEX"].forEach(c=>compareList.push(c));
+  renderCompareList();
+  const panel=document.getElementById("compare-panel");
+  if(panel)panel.scrollIntoView({behavior:"smooth",block:"nearest"});
 };
 
 // ═══════════════════════════════════════════════
@@ -1075,12 +1482,15 @@ function showTradePop(code){
   document.getElementById("pt").textContent=getName(code)||blocCountryName(code);
   document.getElementById("pc-btn").style.display="flex";
   document.getElementById("pmetrics").style.display="none";
+  document.getElementById("analytic-metric").style.display="none";
   document.getElementById("hdi-components").style.display="none";
   document.getElementById("ps").style.display="none";
   document.getElementById("psvg").style.display="none";
   document.getElementById("ptrend").style.display="none";
   document.getElementById("print-btn").style.display="none";
   document.getElementById("compare-btn").style.display="none";
+  const cvBoxT=document.getElementById("convergence-box");
+  if(cvBoxT)cvBoxT.style.display="none";
   const info=document.getElementById("bloc-info");
   info.style.display="block";
   info.innerHTML=tradeBlocInfoHTML(code)+tradeListLinkHTML();
@@ -1098,6 +1508,7 @@ function clearTradePop(){
   document.getElementById("pt").textContent="Pasa el cursor o selecciona un país para ver su bloque comercial";
   document.getElementById("pc-btn").style.display="none";
   document.getElementById("pmetrics").style.display="none";
+  document.getElementById("analytic-metric").style.display="none";
   document.getElementById("hdi-components").style.display="none";
   document.getElementById("ps").style.display="none";
   document.getElementById("psvg").style.display="none";
@@ -1106,6 +1517,8 @@ function clearTradePop(){
   document.getElementById("compare-btn").style.display="none";
   document.getElementById("s3").textContent="—";
   document.getElementById("s4").textContent="—";
+  const cvBoxC=document.getElementById("convergence-box");
+  if(cvBoxC)cvBoxC.style.display="none";
   const info=document.getElementById("bloc-info");
   info.style.display="block";
   info.innerHTML=`<div style="font-size:12px;color:var(--txt2);line-height:1.6;padding:8px 0">Cada color del mapa representa un bloque comercial distinto. Pasa el cursor sobre un país para identificarlo, o haz clic para fijar aquí la explicación del bloque.</div>${tradeListLinkHTML()}`;
@@ -1169,12 +1582,107 @@ function buildTradeAnalysis(codes){
   return text;
 }
 
+// ═══════════════════════════════════════════════
+// CENTRO / SEMI-PERIFERIA / PERIFERIA (Wallerstein)
+// Clasificación de "núcleo" y "semi-periferia" según
+// Salvatore Babones (2005), "The Country-Level Income
+// Structure of the World-Economy", Journal of
+// World-Systems Research 11:29-55 — países clasificados
+// de forma CONSISTENTE en una sola zona durante el
+// período 1975-2002. El resto de los países del mapa se
+// agrupa aquí como "periferia" (incluye tanto a los que
+// Babones clasificó como periferia consistente, como a
+// los que no tuvieron una única zona estable en su
+// período de estudio). Ver nota de limitaciones en la Guía.
+// ═══════════════════════════════════════════════
+const WS_CORE=["AUS","AUT","BEL","CAN","DNK","FIN","FRA","DEU","GRC","HKG","ISL","IRL","ISR","ITA","JPN","LUX","NLD","NZL","NOR","SGP","ESP","SWE","CHE","GBR","USA"];
+const WS_SEMI=["BLZ","BRA","CHL","FJI","HUN","JAM","MYS","MEX","PAN","SYC","ZAF","TUN","TUR","URY"];
+const WS_COLORS={core:"#1d4ed8",semi:"#d97706",periphery:"#b91c1c"};
+const WS_INFO={
+  core:{label:"Centro (núcleo)",desc:"Concentran innovación tecnológica, producción industrial avanzada y capacidad financiera; se benefician de forma sistemática de la estructura jerárquica del comercio y la división internacional del trabajo."},
+  semi:{label:"Semi-periferia",desc:"Posición intermedia: economías industrializadas que exportan tanto manufacturas como materias primas, y que a la vez reciben inversión del centro y proyectan influencia sobre países periféricos. Es la categoría desde la que, según la teoría, resulta más viable ascender hacia el centro."},
+  periphery:{label:"Periferia",desc:"Se especializan principalmente en la exportación de materias primas y productos de menor valor agregado; dependen de capital, tecnología e instituciones externas, con menor margen para fijar los términos de su propia inserción en la economía mundial."}
+};
+function wsZoneOf(code){
+  if(WS_CORE.includes(code))return "core";
+  if(WS_SEMI.includes(code))return "semi";
+  return "periphery";
+}
+function wsColorFor(code){return WS_COLORS[wsZoneOf(code)];}
+function applyPeripheryMap(){
+  msvg.selectAll("path.ctry").each(function(d){
+    if(!d.a3){d3.select(this).classed("ctry-nodata",true).attr("fill",null);return;}
+    d3.select(this).classed("ctry-nodata",false).attr("fill",wsColorFor(d.a3));
+  });
+  const counts={core:0,semi:0,periphery:0};
+  feats.forEach(f=>{if(f.a3)counts[wsZoneOf(f.a3)]++;});
+  document.getElementById("s1").textContent=counts.core;
+  document.getElementById("s2").textContent=counts.semi;
+  document.getElementById("s3").textContent=counts.periphery;
+  document.getElementById("s4").textContent=counts.core+counts.semi+counts.periphery;
+  bldWsLeg();
+}
+function bldWsLeg(){
+  const leg=document.getElementById("leg");
+  leg.innerHTML=["core","semi","periphery"].map(z=>`<span style="display:inline-flex;align-items:center;gap:2px"><span class="lsw" style="background:${WS_COLORS[z]}"></span><span style="font-size:10.5px">${WS_INFO[z].label}</span></span>`).join("");
+}
+function peripheryInfoHTML(code){
+  const zone=wsZoneOf(code);
+  const info=WS_INFO[zone];
+  const babonesNote=(zone!=="periphery")
+    ?`<div style="font-size:10px;color:var(--txt2);margin-top:6px">Clasificación consistente 1975–2002 según Babones (2005).</div>`
+    :`<div style="font-size:10px;color:var(--txt2);margin-top:6px">Incluye países clasificados como periferia por Babones (2005) y países sin una zona única y estable en ese período — ver nota de limitaciones en la Guía.</div>`;
+  return `<div style="background:var(--bg);border-radius:8px;padding:9px 10px">
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px">
+      <span class="lsw" style="background:${WS_COLORS[zone]};width:12px;height:12px;border-radius:3px;display:inline-block"></span>
+      <div style="font-size:13px;font-weight:700;color:var(--txt)">${info.label}</div>
+    </div>
+    <div style="font-size:11.5px;color:var(--txt);line-height:1.55">${info.desc}</div>
+    ${babonesNote}
+  </div>`;
+}
+function showPeripheryPop(code){
+  curCode=code;
+  document.getElementById("pt").textContent=getName(code);
+  document.getElementById("pc-btn").style.display="flex";
+  document.getElementById("pmetrics").style.display="none";
+  document.getElementById("analytic-metric").style.display="none";
+  document.getElementById("hdi-components").style.display="none";
+  document.getElementById("ps").style.display="none";
+  document.getElementById("psvg").style.display="none";
+  document.getElementById("ptrend").style.display="none";
+  document.getElementById("print-btn").style.display="none";
+  document.getElementById("compare-btn").style.display="none";
+  const cvBoxW=document.getElementById("convergence-box");
+  if(cvBoxW)cvBoxW.style.display="none";
+  const info=document.getElementById("bloc-info");
+  info.style.display="block";
+  info.innerHTML=peripheryInfoHTML(code);
+}
+function clearPeripheryPop(){
+  document.getElementById("pt").textContent="Pasa el cursor o selecciona un país para ver su posición estructural";
+  document.getElementById("pc-btn").style.display="none";
+  document.getElementById("pmetrics").style.display="none";
+  document.getElementById("analytic-metric").style.display="none";
+  document.getElementById("hdi-components").style.display="none";
+  document.getElementById("ps").style.display="none";
+  document.getElementById("psvg").style.display="none";
+  document.getElementById("ptrend").style.display="none";
+  document.getElementById("print-btn").style.display="none";
+  document.getElementById("compare-btn").style.display="none";
+  const cvBoxWC=document.getElementById("convergence-box");
+  if(cvBoxWC)cvBoxWC.style.display="none";
+  const info=document.getElementById("bloc-info");
+  info.style.display="block";
+  info.innerHTML=`<div style="font-size:12px;color:var(--txt2);line-height:1.6;padding:8px 0">Clasificación ilustrativa de centro/semi-periferia/periferia según la teoría de sistemas-mundo (Wallerstein), operacionalizada con la lista de Babones (2005). Pasa el cursor sobre un país para ver su posición, o haz clic para fijar la explicación aquí.</div>`;
+}
+
 function buildAnalysis(codes){
   const yr=YRS[cYi];
   if(codes.length===1){
     const c=codes[0];
     const nm=getName(c);
-    const pc=gv(c,"gdp_pc"),gdp=gv(c,"gdp"),hdi=gv(c,"hdi"),un=gv(c,"unemp"),gini=gv(c,"gini");
+    const pc=gv(c,"gdp_pc"),gdp=gv(c,"gdp"),hdi=gv(c,"hdi"),un=gv(c,"unemp"),gini=gv(c,"gini"),debtgni=gv(c,"debtgni"),debtserv=gv(c,"debtserv"),tot=gv(c,"tot"),totFirst=DATA.tot[c]?DATA.tot[c][0]:null;
     let text=`<strong>${nm}</strong> presenta los siguientes indicadores según el Banco Mundial y el PNUD para el año ${yr}.`;
     if(pc!=null&&hdi!=null){
       if(hdi>=0.8&&pc>15000)text+=` Con un PIB per cápita de ${INDS.gdp_pc.fmt(pc)} y un IDH de ${INDS.hdi.fmt(hdi)}, la nación evidencia un nivel de bienestar consolidado y una economía diversificada.`;
@@ -1190,6 +1698,18 @@ function buildAnalysis(codes){
       if(gini>=45)text+=` Su coeficiente de Gini de ${INDS.gini.fmt(gini)} señala una distribución del ingreso muy desigual — un dato que el PIB per cápita y el IDH no capturan por sí solos, ya que ambos son promedios que pueden esconder brechas internas amplias.`;
       else if(gini<32)text+=` Su coeficiente de Gini de ${INDS.gini.fmt(gini)} indica una distribución del ingreso relativamente igualitaria en comparación con el resto del mundo.`;
       else text+=` Su coeficiente de Gini de ${INDS.gini.fmt(gini)} refleja un nivel de desigualdad interna moderado.`;
+    }
+    if(debtgni!=null){
+      if(debtgni>=60)text+=` Su deuda externa equivale al ${INDS.debtgni.fmt(debtgni)} del INB, un nivel elevado que puede limitar el margen de maniobra fiscal frente a acreedores externos.`;
+      else text+=` Su deuda externa equivale al ${INDS.debtgni.fmt(debtgni)} del INB.`;
+    }
+    if(debtserv!=null&&debtserv>=15){
+      text+=` Además, destina ${INDS.debtserv.fmt(debtserv)} de sus ingresos por exportaciones solo al servicio de la deuda externa, una carga que reduce el espacio fiscal disponible para inversión social o productiva.`;
+    }
+    if(tot!=null&&totFirst!=null&&totFirst!==0){
+      const totChange=((tot-totFirst)/totFirst*100);
+      if(totChange<=-10)text+=` Sus términos de intercambio han caído ${Math.abs(totChange).toFixed(0)}% desde 1995, lo que sugiere que necesita exportar relativamente más para sostener el mismo nivel de importaciones — un patrón consistente con la tesis del deterioro secular de los términos de intercambio en economías exportadoras de bienes primarios.`;
+      else if(totChange>=10)text+=` Sus términos de intercambio han mejorado ${totChange.toFixed(0)}% desde 1995, ganando poder adquisitivo internacional relativo.`;
     }
     // Trend analysis
     const pcArr=DATA.gdp_pc[c];
@@ -1278,6 +1798,23 @@ function openReport(codes){
     </table>
     <p style="font-size:11px;color:#9ca3af;margin-top:-6px;margin-bottom:10px">Estas 3 dimensiones (salud, educación, ingreso) son las que el PNUD combina para calcular el IDH mostrado en la tabla anterior.</p>`;
 
+  let structRows=codes.map(c=>{
+    const tot=gv(c,"tot"),debtgni=gv(c,"debtgni"),debtserv=gv(c,"debtserv");
+    return `<tr>
+      <td><strong>${getName(c)}</strong></td>
+      <td>${tot!=null?INDS.tot.fmt(tot):"—"}</td>
+      <td>${debtgni!=null?INDS.debtgni.fmt(debtgni):"—"}</td>
+      <td>${debtserv!=null?INDS.debtserv.fmt(debtserv):"—"}</td>
+    </tr>`;
+  }).join("");
+  const structSection=`
+    <h3>Dependencia estructural</h3>
+    <table>
+      <tr><th>País</th><th>Términos de intercambio (2000=100)</th><th>Deuda externa / INB</th><th>Servicio deuda / export.</th></tr>
+      ${structRows}
+    </table>
+    <p style="font-size:11px;color:#9ca3af;margin-top:-6px;margin-bottom:10px">Términos de intercambio: Banco Mundial (TT.PRI.MRCH.XD.WD) — un valor decreciente en el tiempo indica que el país necesita exportar más para comprar la misma cantidad de importaciones (tesis Prebisch-Singer). Deuda externa y servicio de deuda: Banco Mundial, Estadísticas de Deuda Internacional — cobertura limitada principalmente a países de ingreso bajo y medio; las celdas vacías en economías de ingreso alto no implican ausencia de deuda, sino que el Banco Mundial no las incluye en esta base.</p>`;
+
   // Trend table for single country
   let trendSection="";
   if(!isMulti){
@@ -1315,13 +1852,14 @@ function openReport(codes){
       ${tableRows}
     </table>
     ${hdiCompSection}
+    ${structSection}
     ${trendSection}
     <h3>Análisis económico</h3>
     <div class="analysis-box"><p>${analysis}</p></div>
     ${tradeSection}
     <h3>Notas metodológicas</h3>
-    <p>Los datos de PIB per cápita y PIB total corresponden a valores nominales en USD corrientes (Banco Mundial, NY.GDP.PCAP.CD y NY.GDP.MKTP.CD). El IDH y sus componentes (esperanza de vida, escolaridad esperada y promedio, INB per cápita) provienen de la base de datos histórica del PNUD (Human Development Report Data Center), con series anuales 1990–2023 para la gran mayoría de países; en los casos donde el PNUD no publica un año puntual, el valor se estima por interpolación lineal entre los años disponibles más cercanos. La tasa de desempleo es el porcentaje de la población activa sin empleo (SL.UEM.TOTL.ZS). El coeficiente de Gini (SI.POV.GINI, Banco Mundial) proviene de encuestas de hogares nacionales, por lo que su cobertura es irregular: muchos países solo tienen dato cada 3–5 años, y algunos no tienen ninguno; las celdas "—" en Gini casi siempre significan "sin encuesta ese año", no "desigualdad nula". Los datos se cargan en tiempo real y pueden diferir levemente según actualizaciones del Banco Mundial.</p>
-    <p style="margin-top:8px"><strong>Limitación importante para análisis centro-periferia:</strong> el conjunto de indicadores de este mapa (PIB per cápita, PIB total, IDH, desempleo, Gini) describe <em>resultados</em> de nivel de vida y su distribución interna, pero no mide directamente la <em>posición</em> de un país en la división internacional del trabajo (qué exporta, con cuánta concentración, con cuánto valor agregado, ni su carga de deuda externa). Para ese tipo de análisis —central en la teoría de la dependencia y en el enfoque de cadenas globales de valor— se requieren indicadores adicionales que este mapa aún no incorpora; ver la sección "Hoja de ruta de ampliación" en la Guía de uso.</p>
+    <p>Los datos de PIB per cápita y PIB total corresponden a valores nominales en USD corrientes (Banco Mundial, NY.GDP.PCAP.CD y NY.GDP.MKTP.CD). El IDH y sus componentes (esperanza de vida, escolaridad esperada y promedio, INB per cápita) provienen de la base de datos histórica del PNUD (Human Development Report Data Center), con series anuales 1990–2023 para la gran mayoría de países; en los casos donde el PNUD no publica un año puntual, el valor se estima por interpolación lineal entre los años disponibles más cercanos. La tasa de desempleo es el porcentaje de la población activa sin empleo (SL.UEM.TOTL.ZS). El coeficiente de Gini (SI.POV.GINI, Banco Mundial) proviene de encuestas de hogares nacionales, por lo que su cobertura es irregular: muchos países solo tienen dato cada 3–5 años, y algunos no tienen ninguno; las celdas "—" en Gini casi siempre significan "sin encuesta ese año", no "desigualdad nula". Los términos de intercambio (TT.PRI.MRCH.XD.WD) y las dos variables de deuda externa (DT.DOD.DECT.GN.ZS, DT.TDS.DECT.EX.ZS) también son del Banco Mundial; estas últimas cubren sobre todo a países de ingreso bajo y medio reportados en sus Estadísticas de Deuda Internacional, por lo que muchas economías de ingreso alto no tienen dato — ausencia que no debe interpretarse como "sin deuda". El control de la corrupción (CC.EST, Worldwide Governance Indicators) es una estimación estadística en escala de -2.5 a 2.5 con intervalo de confianza propio, publicada de forma bienal entre 1996 y 2002 y anual después; representa solo 1 de las 6 dimensiones del WGI. La inversión en I+D (GB.XPD.RSDV.GD.ZS) y la IED recibida (BX.KLT.DINV.WD.GD.ZS) tienen huecos frecuentes en países de bajos ingresos, donde estas encuestas se levantan con menor regularidad. Las emisiones de CO₂ per cápita (EN.GHG.CO2.PC.CE.AR5, metodología EDGAR/JRC) muestran el flujo anual actual, no el acumulado histórico — por eso reflejan qué países emiten más <em>hoy</em>, pero no alcanzan por sí solas para sostener el argumento de "deuda ecológica" histórica del Sur Global, que depende de series acumuladas desde la industrialización. Los datos se cargan en tiempo real y pueden diferir levemente según actualizaciones del Banco Mundial.</p>
+    <p style="margin-top:8px"><strong>Limitación importante para análisis centro-periferia:</strong> con la incorporación de términos de intercambio, deuda externa y servicio de deuda, este mapa ya cubre una parte del componente de <em>posición estructural</em> en la economía mundial. Sigue sin incluir el índice de concentración de exportaciones (UNCTAD), la participación en cadenas globales de valor (OCDE-TiVA) ni una clasificación centro/semi-periferia/periferia — ver la sección "Hoja de ruta de ampliación" en la Guía de uso para el detalle de qué falta y con qué fuente podría incorporarse.</p>
     <p style="margin-top:8px"><strong>¿Qué es el IDH?</strong> El Índice de Desarrollo Humano es una medida compuesta creada por el PNUD que resume el desarrollo de un país en tres dimensiones, sin reducirlo solo a lo económico: <strong>esperanza de vida</strong> al nacer (salud), <strong>años de escolaridad</strong> esperados y promedio (educación), e <strong>ingreso nacional bruto per cápita</strong> (nivel de vida). Su escala va de 0 a 1, donde valores más cercanos a 1 indican mayor desarrollo humano.</p>
     <p style="margin-top:8px;margin-bottom:4px"><strong>Cómo se calcula la "Clasificación"</strong> de la tabla: se usa el IDH cuando el país tiene ese dato; si no, se usa el PIB per cápita como criterio sustituto de nivel de ingreso. Estas son las categorías posibles:</p>
     ${devLegendHTML()}
@@ -1339,7 +1877,26 @@ document.getElementById("report-overlay").addEventListener("click",e=>{if(e.targ
 // HELP MODAL
 // ═══════════════════════════════════════════════
 const helpOverlay=document.getElementById("help-overlay");
-document.getElementById("help-btn").onclick=()=>helpOverlay.classList.add("open");
+function resetGuideTopics(){
+  document.querySelectorAll(".gt-btn").forEach(b=>b.classList.remove("on"));
+  document.querySelectorAll(".help-section").forEach(s=>s.classList.remove("active"));
+  const ph=document.getElementById("guide-placeholder");
+  if(ph)ph.style.display="block";
+}
+document.querySelectorAll(".gt-btn").forEach(b=>{
+  b.onclick=()=>{
+    document.querySelectorAll(".gt-btn").forEach(x=>x.classList.remove("on"));
+    b.classList.add("on");
+    document.querySelectorAll(".help-section").forEach(s=>s.classList.remove("active"));
+    const target=document.getElementById(b.dataset.topic);
+    if(target)target.classList.add("active");
+    const ph=document.getElementById("guide-placeholder");
+    if(ph)ph.style.display="none";
+    const modal=document.getElementById("help-modal");
+    if(modal)modal.scrollTop=0;
+  };
+});
+document.getElementById("help-btn").onclick=()=>{helpOverlay.classList.add("open");resetGuideTopics();};
 document.getElementById("help-close").onclick=()=>helpOverlay.classList.remove("open");
 helpOverlay.addEventListener("click",e=>{if(e.target===helpOverlay)helpOverlay.classList.remove("open");});
 
@@ -1351,15 +1908,32 @@ renderTradeBlocModal();
 document.getElementById("trade-btn").onclick=function(){
   if(cInd==="trade"){
     cInd=prevInd||"gdp_pc";
-    document.querySelectorAll(".ibtn").forEach(x=>x.classList.toggle("on",x.dataset.k===cInd));
+    document.querySelectorAll(".ibtn[data-k]").forEach(x=>x.classList.toggle("on",x.dataset.k===cInd));
     this.classList.remove("on");
   }else{
-    prevInd=cInd;
+    if(cInd!=="periphery")prevInd=cInd;
     cInd="trade";
-    document.querySelectorAll(".ibtn").forEach(x=>x.classList.remove("on"));
+    document.querySelectorAll(".ibtn[data-k]").forEach(x=>x.classList.remove("on"));
     this.classList.add("on");
   }
+  document.getElementById("periphery-btn").classList.remove("on");
   lastTradeHover=null;
+  syncAnalyticsPillState();
+  updMap();
+};
+document.getElementById("periphery-btn").onclick=function(){
+  if(cInd==="periphery"){
+    cInd=prevInd||"gdp_pc";
+    document.querySelectorAll(".ibtn[data-k]").forEach(x=>x.classList.toggle("on",x.dataset.k===cInd));
+    this.classList.remove("on");
+  }else{
+    if(cInd!=="trade")prevInd=cInd;
+    cInd="periphery";
+    document.querySelectorAll(".ibtn[data-k]").forEach(x=>x.classList.remove("on"));
+    this.classList.add("on");
+  }
+  document.getElementById("trade-btn").classList.remove("on");
+  syncAnalyticsPillState();
   updMap();
 };
 document.getElementById("trade-close").onclick=()=>tradeOverlay.classList.remove("open");
@@ -1394,20 +1968,50 @@ function renderScatter(){
   const g=sv.append("g").attr("transform","translate("+ml+","+mt+")");
   const xs=d3.scaleLog().domain([300,d3.max(pts,p=>p.pc)*1.15]).range([0,w]).clamp(true);
   const ys=d3.scaleLinear().domain([0.25,1]).range([h,0]);
+
+  // Quadrant reference lines: median PIB per cápita and umbral IDH 0.80
+  const pcSorted=pts.map(p=>p.pc).sort((a,b)=>a-b);
+  const medPC=pcSorted[Math.floor(pcSorted.length/2)];
+  const hdiThresh=0.80;
+  const quadFill=dark?"rgba(255,255,255,.035)":"rgba(15,23,42,.03)";
+  // shade the "alto ingreso y alto IDH" and "bajo ingreso y bajo IDH" quadrants (the "expected" pattern)
+  g.append("rect").attr("x",xs(medPC)).attr("y",0).attr("width",w-xs(medPC)).attr("height",ys(hdiThresh)).attr("fill",quadFill);
+  g.append("rect").attr("x",0).attr("y",ys(hdiThresh)).attr("width",xs(medPC)).attr("height",h-ys(hdiThresh)).attr("fill",quadFill);
+  g.append("line").attr("x1",xs(medPC)).attr("x2",xs(medPC)).attr("y1",0).attr("y2",h).attr("stroke",ac).attr("stroke-width",1).attr("stroke-dasharray","3,3").attr("opacity",.55);
+  g.append("line").attr("x1",0).attr("x2",w).attr("y1",ys(hdiThresh)).attr("y2",ys(hdiThresh)).attr("stroke",ac).attr("stroke-width",1).attr("stroke-dasharray","3,3").attr("opacity",.55);
+
   g.append("g").attr("transform","translate(0,"+h+")").call(d3.axisBottom(xs).ticks(5,"~s").tickFormat(d=>"$"+d3.format("~s")(d))).call(ax=>{ax.select(".domain").attr("stroke",ac);ax.selectAll(".tick line").attr("stroke",ac);ax.selectAll("text").attr("fill",ac).style("font-size","10px");});
   g.append("g").call(d3.axisLeft(ys).ticks(6)).call(ax=>{ax.select(".domain").attr("stroke",ac);ax.selectAll(".tick line").attr("stroke",ac);ax.selectAll("text").attr("fill",ac).style("font-size","10px");});
   g.append("text").attr("x",w/2).attr("y",h+38).attr("text-anchor","middle").attr("fill",ac).style("font-size","11px").style("font-weight","600").text("PIB per cápita (USD, escala log)");
   g.append("text").attr("transform","rotate(-90)").attr("x",-h/2).attr("y",-48).attr("text-anchor","middle").attr("fill",ac).style("font-size","11px").style("font-weight","600").text("Índice de Desarrollo Humano (IDH)");
+
+  // quadrant labels
+  g.append("text").attr("class","scatter-quad-lbl").attr("x",w-6).attr("y",12).attr("text-anchor","end").text("Ingreso alto · IDH alto");
+  g.append("text").attr("class","scatter-quad-lbl").attr("x",6).attr("y",12).attr("text-anchor","start").text("Ingreso bajo · IDH alto");
+  g.append("text").attr("class","scatter-quad-lbl").attr("x",6).attr("y",h-6).attr("text-anchor","start").text("Ingreso bajo · IDH bajo");
+  g.append("text").attr("class","scatter-quad-lbl").attr("x",w-6).attr("y",h-6).attr("text-anchor","end").text("Ingreso alto · IDH bajo");
+
+  const tt=document.getElementById("scatter-tt");
   g.selectAll("circle").data(pts).join("circle")
     .attr("cx",p=>xs(p.pc)).attr("cy",p=>ys(p.hdi)).attr("r",4.2)
-    .attr("fill",p=>p.col).attr("fill-opacity",0.75).attr("stroke",dark?"#0f172a":"#fff").attr("stroke-width",0.6)
+    .attr("fill",p=>p.col).attr("fill-opacity",0.8).attr("stroke",dark?"#0f172a":"#fff").attr("stroke-width",0.6)
     .style("cursor","pointer")
-    .append("title").text(p=>getName(p.code)+"\nPIB p.c.: "+INDS.gdp_pc.fmt(p.pc)+"\nIDH: "+INDS.hdi.fmt(p.hdi));
+    .on("mousemove touchstart",function(event,p){
+      const cx=ml+xs(p.pc), cy=mt+ys(p.hdi);
+      d3.select(this).attr("r",6.5);
+      tt.innerHTML=`<b>${getName(p.code)}</b><span>PIB p.c.: ${INDS.gdp_pc.fmt(p.pc)}</span><br><span>IDH: ${INDS.hdi.fmt(p.hdi)}</span>`;
+      tt.style.display="block";
+      tt.style.left=Math.min(cx+10,W-150)+"px";
+      tt.style.top=Math.max(cy-10,0)+"px";
+    })
+    .on("mouseleave",function(){d3.select(this).attr("r",4.2);tt.style.display="none";});
   const legend=document.getElementById("scatter-legend");
   const blocs=Object.keys(TRADE_BLOCS);
   legend.innerHTML=blocs.map(b=>`<span><i style="background:${BLOC_COLORS[b]}"></i>${b}</span>`).join("")+`<span><i style="background:#9ca3af"></i>Sin bloque registrado</span>`;
 }
-document.getElementById("scatter-btn").onclick=function(){
+document.getElementById("scatter-btn").onclick=function(e){
+  e.stopPropagation();
+  closeAnalyticsPanel();
   scatterOverlay.classList.add("open");
   renderScatter();
 };
@@ -1498,6 +2102,10 @@ function handleMapMouseMove(evt, d) {
     var blocs = blocsOf(d.a3);
     ttEl.innerHTML = '<b>' + nm + '</b><span class="ttlbl">' + (blocs.length ? blocs.join(', ') : 'Sin bloque registrado') + '</span>';
     if (d.a3 !== lastTradeHover) { lastTradeHover = d.a3; showTradePop(d.a3); }
+  } else if (cInd === 'periphery') {
+    var zoneLbl = WS_INFO[wsZoneOf(d.a3)].label;
+    ttEl.innerHTML = '<b>' + nm + '</b><span class="ttlbl">' + zoneLbl + '</span>';
+    if (d.a3 !== lastTradeHover) { lastTradeHover = d.a3; showPeripheryPop(d.a3); }
   } else {
     var v = gv(d.a3), ind = INDS[cInd];
     ttEl.innerHTML = '<b>' + nm + '</b><span class="ttlbl">' + ind.short + ': </span><span class="ttval">' + (v != null ? ind.fmt(v) : 'Sin datos') + '</span>';
@@ -1510,7 +2118,9 @@ function handleMapMouseMove(evt, d) {
 }
 function handleMapClick(evt, d) {
   if (!d.a3) return;
-  if (cInd === 'trade') { showTradePop(d.a3); } else { showPop(d.a3, true); }
+  if (cInd === 'trade') { showTradePop(d.a3); }
+  else if (cInd === 'periphery') { showPeripheryPop(d.a3); }
+  else { showPop(d.a3, true); }
 }
 
 // ═══════════════════════════════════════════════
@@ -1709,6 +2319,51 @@ function boot() {
     updMap();
     setLoadText('Cargando coeficiente de Gini…');
     return loadWB('SI.POV.GINI', 'gini', null);
+  }).then(function() {
+    setProgress(95);
+    updMap();
+    setLoadText('Cargando términos de intercambio…');
+    return loadWB('TT.PRI.MRCH.XD.WD', 'tot', null);
+  }).then(function() {
+    setProgress(97);
+    updMap();
+    setLoadText('Cargando deuda externa…');
+    return loadWB('DT.DOD.DECT.GN.ZS', 'debtgni', null);
+  }).then(function() {
+    setProgress(99);
+    updMap();
+    setLoadText('Cargando servicio de deuda…');
+    return loadWB('DT.TDS.DECT.EX.ZS', 'debtserv', null);
+  }).then(function() {
+    setProgress(99.2);
+    updMap();
+    setLoadText('Cargando control de la corrupción…');
+    return loadWB('CC.EST', 'gov', null);
+  }).then(function() {
+    setProgress(99.4);
+    updMap();
+    setLoadText('Cargando inversión en I+D…');
+    return loadWB('GB.XPD.RSDV.GD.ZS', 'rnd', null);
+  }).then(function() {
+    setProgress(99.6);
+    updMap();
+    setLoadText('Cargando inversión extranjera directa…');
+    return loadWB('BX.KLT.DINV.WD.GD.ZS', 'fdi', null);
+  }).then(function() {
+    setProgress(99.8);
+    updMap();
+    setLoadText('Cargando emisiones de CO₂…');
+    return loadWB('EN.GHG.CO2.PC.CE.AR5', 'co2', null);
+  }).then(function() {
+    setProgress(99.85);
+    updMap();
+    setLoadText('Cargando exportaciones de alta tecnología…');
+    return loadWB('TX.VAL.TECH.MF.ZS', 'hitech', null);
+  }).then(function() {
+    setProgress(99.92);
+    updMap();
+    setLoadText('Cargando valor agregado manufacturero…');
+    return loadWB('NV.IND.MANF.ZS', 'manuf', null);
   }).then(function() {
     setProgress(100);
     updMap();
