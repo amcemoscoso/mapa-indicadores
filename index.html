@@ -75,8 +75,9 @@ body{background:var(--bg);font-family:var(--font);padding:12px 14px}
 .analytics-pill.has-active{background:#0f766e;border-color:#0f766e;color:#fff}
 #analytics-chevron{transition:transform .15s;font-size:13px!important}
 .analytics-pill.on #analytics-chevron{transform:rotate(180deg)}
-#analytics-panel{display:none;position:absolute;top:calc(100% + 6px);left:0;z-index:40;background:var(--bg);border:1px solid var(--bdr);border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.18);padding:10px;width:min(560px,88vw);max-height:70vh;overflow-y:auto}
-#analytics-panel.show{display:block}
+#analytics-panel{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.5);padding:16px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+#analytics-panel.show{display:flex;align-items:flex-start;justify-content:center}
+#analytics-box{background:var(--bg);border:1px solid var(--bdr);border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.18);padding:10px;width:min(560px,88vw);max-height:85vh;overflow-y:auto;margin:auto;position:relative}
 .ap-cat{padding:8px 4px;border-bottom:1px solid var(--bdr)}
 .ap-scatter-btn{width:100%;display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:9px 12px;border-radius:9px;border:1px dashed #0f766e;background:rgba(15,118,110,.06);color:#0f766e;font-size:12.5px;font-weight:700;cursor:pointer;text-align:left}
 .ap-scatter-btn:hover{background:rgba(15,118,110,.14)}
@@ -124,10 +125,11 @@ body{background:var(--bg);font-family:var(--font);padding:12px 14px}
 #retrybtn{display:none;font-size:12px;padding:6px 14px;border-radius:14px;border:1px solid var(--bdr);background:var(--bg);color:var(--txt);cursor:pointer;margin-top:4px}
 
 /* ── Tooltip ── */
-#tt{position:absolute;background:var(--bg);border:1px solid var(--bdr);border-radius:8px;padding:7px 10px;font-size:12px;pointer-events:none;display:none;z-index:30;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+#tt{position:absolute;background:var(--bg);border:1px solid var(--bdr);border-radius:8px;padding:7px 10px;font-size:12px;pointer-events:none;display:none;z-index:30;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.12);max-width:240px}
 #tt b{display:block;color:var(--txt);margin-bottom:2px}
 #tt .ttlbl{color:var(--txt2);font-size:11px}
 #tt .ttval{color:var(--txt);font-weight:700}
+#tt .ttexp{display:block;white-space:normal;font-size:10.5px;color:var(--txt2);margin-top:3px;padding-top:3px;border-top:1px dashed var(--bdr2)}
 
 /* ── Map paths ── */
 path.ctry{transition:fill .22s}
@@ -146,6 +148,9 @@ path.ctry{transition:fill .22s}
 #analytic-metric .pm{border:1px solid var(--bdr2)}
 #am-analysis{display:none;font-size:11px;line-height:1.55;padding:8px 9px;border-radius:8px;margin-top:6px;background:rgba(15,118,110,.08);border:1px solid rgba(15,118,110,.25);color:var(--txt)}
 #hdi-components{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:9px;padding-top:9px;border-top:1px dashed var(--bdr2)}
+#exports-box{font-size:11.5px;color:var(--txt2);line-height:1.5;margin-bottom:9px;padding:7px 9px;border:1px solid var(--bdr2);border-radius:8px;background:var(--bg2)}
+#exports-box strong{color:var(--txt);font-weight:700}
+#exports-box i{margin-right:4px;color:#0f766e}
 .hdi-components-title{grid-column:1 / -1;font-size:10.5px;font-weight:700;color:var(--txt2);display:flex;align-items:center;margin-bottom:-2px}
 .pm{background:var(--bg);border-radius:8px;padding:7px 8px;min-width:0}
 .pml{font-size:9.5px;color:var(--txt2);display:flex;align-items:center;gap:3px;margin-bottom:1px}
@@ -309,12 +314,13 @@ path.ctry{transition:fill .22s}
   </div>
   <button class="trade-pill" id="trade-btn" title="Bloques comerciales internacionales" data-concept="Principales bloques comerciales y de integración económica" data-def="">
     <i class="ti ti-world-www"></i>Comercio Internacional</button>
-  <button class="periphery-pill" id="periphery-btn" title="Clasificación centro / semi-periferia / periferia (Wallerstein)">
+  <button class="periphery-pill" id="periphery-btn" title="Clasificación centro / semi-periferia / periferia (Wallerstein)" data-concept="Centro / Semi-periferia / Periferia (Wallerstein)" data-def="Colorea cada país según su posición en la teoría de sistemas-mundo de Immanuel Wallerstein, usando la clasificación de Babones (2005): Centro (economías industrializadas dominantes), Semi-periferia (posición intermedia) o Periferia (el resto). Haz clic sobre un país para fijar en el panel lateral su perfil específico.">
     <i class="ti ti-hierarchy-3"></i>Centro-Periferia</button>
   <div id="analytics-wrap">
   <button class="analytics-pill" id="analytics-btn" title="Indicadores analíticos agrupados por función" aria-expanded="false">
     <i class="ti ti-layout-grid"></i>Función analítica<i class="ti ti-chevron-down" id="analytics-chevron"></i></button>
   <div id="analytics-panel" role="menu">
+   <div id="analytics-box">
     <div class="ap-cat">
       <div class="ap-cat-h"><i class="ti ti-arrows-shuffle"></i>1. Dependencia estructural / posición en la economía mundial</div>
       <div class="ap-cat-btns">
@@ -381,6 +387,7 @@ path.ctry{transition:fill .22s}
     <div class="ap-cat" style="border-bottom:none;padding-top:2px">
       <button id="preload-compare-btn" class="ap-scatter-btn"><i class="ti ti-scale"></i>Comparar: Asia Oriental vs. América Latina<span class="ap-scatter-sub">Precarga Corea del Sur, Singapur, China, Argentina, Brasil y México para una comparación centro-periferia</span></button>
     </div>
+   </div>
   </div>
   </div>
   <button class="help-pill" id="help-btn" title="Guía de uso"><i class="ti ti-help-circle"></i></button>
@@ -444,6 +451,7 @@ path.ctry{transition:fill .22s}
         <div class="pm"><div class="pml"><i class="ti ti-book-2"></i>Escolaridad promedio</div><div class="pmv" id="hc-mys">—</div></div>
         <div class="pm"><div class="pml"><i class="ti ti-currency-dollar"></i>INB per cápita (PPA)</div><div class="pmv" id="hc-gnipc">—</div></div>
       </div>
+      <div id="exports-box" style="display:none"></div>
       <div id="bloc-info" style="display:none"></div>
       <div id="ps">&nbsp;</div>
       <svg id="psvg" width="100%" height="148" style="display:block"></svg>
@@ -462,7 +470,7 @@ path.ctry{transition:fill .22s}
   </div>
 </div>
 
-<div id="credit">Fuente: Banco Mundial (World Development Indicators, incl. Gini SI.POV.GINI, términos de intercambio TT.PRI.MRCH.XD.WD, deuda externa DT.DOD.DECT.GN.ZS y DT.TDS.DECT.EX.ZS, gobernanza CC.EST, I+D GB.XPD.RSDV.GD.ZS, IED BX.KLT.DINV.WD.GD.ZS, CO₂ EN.GHG.CO2.PC.CE.AR5, exportaciones de alta tecnología TX.VAL.TECH.MF.ZS, valor agregado manufacturero NV.IND.MANF.ZS) · IDH: PNUD, Informe de Desarrollo Humano · Centro/semi-periferia: Babones (2005), Journal of World-Systems Research 11:29-55 · Límites: Natural Earth / world-atlas</div>
+<div id="credit">Fuente: Banco Mundial (World Development Indicators, incl. Gini SI.POV.GINI, términos de intercambio TT.PRI.MRCH.XD.WD, deuda externa DT.DOD.DECT.GN.ZS y DT.TDS.DECT.EX.ZS, gobernanza CC.EST, I+D GB.XPD.RSDV.GD.ZS, IED BX.KLT.DINV.WD.GD.ZS, CO₂ EN.GHG.CO2.PC.CE.AR5, exportaciones de alta tecnología TX.VAL.TECH.MF.ZS, valor agregado manufacturero NV.IND.MANF.ZS) · IDH: PNUD, Informe de Desarrollo Humano · Centro/semi-periferia: Babones (2005), Journal of World-Systems Research 11:29-55 · Productos de exportación: síntesis propia a partir de perfiles de comercio de OEC (Observatory of Economic Complexity, oec.world) y OMC/UNCTAD · Límites: Natural Earth / world-atlas</div>
 
 <!-- ═══ HELP MODAL ═══ -->
 <div id="help-overlay" role="dialog" aria-modal="true">
@@ -610,6 +618,7 @@ path.ctry{transition:fill .22s}
       <p>Es distinta del <strong>Informe comparativo</strong>: la ficha es un perfil completo de <strong>un solo país</strong>, mientras que el informe comparativo está pensado para 2 o más. Para generarla: haz clic en un país en el mapa para abrir su panel, y pulsa el botón <strong>"Imprimir ficha de país"</strong> que aparece debajo del mini-gráfico histórico.</p>
       <p style="margin-top:8px">Se abre una ventana con un documento que empieza con un <strong>análisis integral</strong> redactado a partir de todos los indicadores del país (incluye desde PIB e IDH hasta gobernanza, innovación y sostenibilidad), seguido de los <strong>cuadros comparativos</strong> (indicadores principales, componentes del IDH, dependencia estructural, gobernanza/innovación/sostenibilidad y evolución histórica 1995–2023) y sus <strong>gráficos</strong>. Al final, en una <strong>página aparte al imprimir</strong>, se incluye la sección de <strong>Notas metodológicas</strong> con la fuente primaria y el código de serie exacto de cada dato mostrado, además de su clasificación de desarrollo. Desde esa ventana puedes imprimir directamente o guardar como PDF con el diálogo de impresión del navegador (Ctrl/Cmd+P → "Guardar como PDF").</p>
       <p style="margin-top:8px">Internamente usa el mismo generador que el informe comparativo: agregar un único país a la comparación y pulsar "Generar informe comparativo" produce el mismo resultado que el botón "Imprimir ficha de país" del panel.</p>
+      <p style="margin-top:8px"><strong>Principales exportaciones:</strong> el panel lateral (y la ficha impresa) muestra también una línea con los 2-4 productos de exportación más representativos del país, igual que la etiqueta flotante al pasar el cursor sobre el mapa. Es una síntesis divulgativa simplificada a partir de perfiles de comercio de <strong>OEC (Observatory of Economic Complexity, oec.world)</strong> y de la OMC/UNCTAD para los países con menor cobertura en OEC — no son series temporales ni porcentajes exactos de participación, sino una referencia rápida del tipo de inserción comercial del país.</p>
     </div>
     <div class="help-section" id="t-classification">
       <h3>Clasificación de desarrollo</h3>
@@ -828,24 +837,43 @@ function updateTimelineAnnotHighlight(){
 const CL_N=["#7f1d1d","#c2410c","#d97706","#65a30d","#15803d","#166534"];
 const CL_I=["#166534","#15803d","#65a30d","#d97706","#c2410c","#7f1d1d"];
 const INDS={
-  gdp_pc:{lbl:"PIB per cápita (USD)",short:"PIB p.c.",fmt:v=>"$"+Math.round(v).toLocaleString("es"),invert:false,unit:"USD"},
-  gdp:{lbl:"PIB total (miles M USD)",short:"PIB total",fmt:v=>"$"+v.toFixed(1)+"B",invert:false,unit:"miles M USD"},
-  hdi:{lbl:"Índice de Desarrollo Humano",short:"IDH",fmt:v=>v.toFixed(3),invert:false,unit:"0–1"},
-  unemp:{lbl:"Desempleo (%)",short:"Desempleo",fmt:v=>v.toFixed(1)+"%",invert:true,unit:"%"},
-  gini:{lbl:"Coeficiente de Gini (desigualdad de ingresos)",short:"Gini",fmt:v=>v.toFixed(1),invert:true,unit:"0–100"},
-  tot:{lbl:"Términos de intercambio (índice, 2000=100)",short:"Términos interc.",fmt:v=>v.toFixed(1),invert:false,unit:"índice"},
-  debtgni:{lbl:"Deuda externa (% del INB)",short:"Deuda ext./INB",fmt:v=>v.toFixed(1)+"%",invert:true,unit:"%"},
-  debtserv:{lbl:"Servicio de deuda (% de exportaciones)",short:"Serv. deuda/export.",fmt:v=>v.toFixed(1)+"%",invert:true,unit:"%"},
-  gov:{lbl:"Control de la corrupción (gobernanza)",short:"Gobernanza",fmt:v=>v.toFixed(2),invert:false,unit:"-2.5 a 2.5"},
-  rnd:{lbl:"Inversión en I+D (% del PIB)",short:"I+D",fmt:v=>v.toFixed(2)+"%",invert:false,unit:"%"},
-  fdi:{lbl:"Inversión Extranjera Directa recibida (% del PIB)",short:"IED recibida",fmt:v=>v.toFixed(1)+"%",invert:false,unit:"%"},
-  co2:{lbl:"Emisiones de CO₂ (t per cápita)",short:"CO₂ per cápita",fmt:v=>v.toFixed(1)+" t",invert:true,unit:"t CO₂e"},
-  hitech:{lbl:"Exportaciones de alta tecnología (% de export. manufactureras)",short:"Export. alta tecnología",fmt:v=>v.toFixed(1)+"%",invert:false,unit:"%"},
-  manuf:{lbl:"Valor agregado manufacturero (% del PIB)",short:"Valor agr. manufacturero",fmt:v=>v.toFixed(1)+"%",invert:false,unit:"%"}
+  gdp_pc:{lbl:"PIB per cápita (USD)",short:"PIB p.c.",fmt:v=>"$"+Math.round(v).toLocaleString("es"),invert:false,unit:"USD",legLo:"Ingreso per cápita bajo",legHi:"Ingreso per cápita alto"},
+  gdp:{lbl:"PIB total (miles M USD)",short:"PIB total",fmt:v=>"$"+v.toFixed(1)+"B",invert:false,unit:"miles M USD",legLo:"Economía pequeña",legHi:"Economía grande"},
+  hdi:{lbl:"Índice de Desarrollo Humano",short:"IDH",fmt:v=>v.toFixed(3),invert:false,unit:"0–1",legLo:"IDH bajo (subdesarrollo)",legHi:"IDH alto (desarrollo)"},
+  unemp:{lbl:"Desempleo (%)",short:"Desempleo",fmt:v=>v.toFixed(1)+"%",invert:true,unit:"%",legLo:"Desempleo bajo",legHi:"Desempleo alto"},
+  gini:{lbl:"Coeficiente de Gini (desigualdad de ingresos)",short:"Gini",fmt:v=>v.toFixed(1),invert:true,unit:"0–100",legLo:"Baja desigualdad",legHi:"Alta desigualdad"},
+  tot:{lbl:"Términos de intercambio (índice, 2000=100)",short:"Términos interc.",fmt:v=>v.toFixed(1),invert:false,unit:"índice",legLo:"Términos de intercambio desfavorables",legHi:"Términos de intercambio favorables"},
+  debtgni:{lbl:"Deuda externa (% del INB)",short:"Deuda ext./INB",fmt:v=>v.toFixed(1)+"%",invert:true,unit:"%",legLo:"Deuda externa baja",legHi:"Deuda externa alta"},
+  debtserv:{lbl:"Servicio de deuda (% de exportaciones)",short:"Serv. deuda/export.",fmt:v=>v.toFixed(1)+"%",invert:true,unit:"%",legLo:"Servicio de deuda bajo",legHi:"Servicio de deuda alto"},
+  gov:{lbl:"Control de la corrupción (gobernanza)",short:"Gobernanza",fmt:v=>v.toFixed(2),invert:false,unit:"-2.5 a 2.5",legLo:"Más corrupción",legHi:"Menos corrupción"},
+  rnd:{lbl:"Inversión en I+D (% del PIB)",short:"I+D",fmt:v=>v.toFixed(2)+"%",invert:false,unit:"%",legLo:"Poca inversión en I+D",legHi:"Alta inversión en I+D"},
+  fdi:{lbl:"Inversión Extranjera Directa recibida (% del PIB)",short:"IED recibida",fmt:v=>v.toFixed(1)+"%",invert:false,unit:"%",legLo:"Poca IED recibida",legHi:"Alta IED recibida"},
+  co2:{lbl:"Emisiones de CO₂ (t per cápita)",short:"CO₂ per cápita",fmt:v=>v.toFixed(1)+" t",invert:true,unit:"t CO₂e",legLo:"Bajas emisiones de CO₂",legHi:"Altas emisiones de CO₂"},
+  hitech:{lbl:"Exportaciones de alta tecnología (% de export. manufactureras)",short:"Export. alta tecnología",fmt:v=>v.toFixed(1)+"%",invert:false,unit:"%",legLo:"Pocas exportaciones de alta tecnología",legHi:"Muchas exportaciones de alta tecnología"},
+  manuf:{lbl:"Valor agregado manufacturero (% del PIB)",short:"Valor agr. manufacturero",fmt:v=>v.toFixed(1)+"%",invert:false,unit:"%",legLo:"Bajo valor agregado manufacturero",legHi:"Alto valor agregado manufacturero"}
 };
 const DATA={gdp_pc:{},gdp:{},hdi:{},unemp:{},le:{},eys:{},mys:{},gnipc:{},gini:{},tot:{},debtgni:{},debtserv:{},gov:{},rnd:{},fdi:{},co2:{},hitech:{},manuf:{}};
 const COUNTRY_NAMES_ES={AFG:"Afganistán",AGO:"Angola",ALB:"Albania",AND:"Andorra",ARE:"Emiratos Árabes Unidos",ARG:"Argentina",ARM:"Armenia",ATG:"Antigua y Barbuda",AUS:"Australia",AUT:"Austria",AZE:"Azerbaiyán",BDI:"Burundi",BEL:"Bélgica",BEN:"Benín",BFA:"Burkina Faso",BGD:"Bangladés",BGR:"Bulgaria",BHR:"Baréin",BHS:"Bahamas",BIH:"Bosnia y Herzegovina",BLR:"Bielorrusia",BLZ:"Belice",BMU:"Bermudas",BOL:"Bolivia",BRA:"Brasil",BRN:"Brunéi",BTN:"Bután",BWA:"Botsuana",CAF:"República Centroafricana",CAN:"Canadá",CHE:"Suiza",CHL:"Chile",CHN:"China",CIV:"Costa de Marfil",CMR:"Camerún",COD:"R.D. del Congo",COG:"República del Congo",COL:"Colombia",COM:"Comoras",CPV:"Cabo Verde",CRI:"Costa Rica",CUB:"Cuba",CYP:"Chipre",CZE:"Chequia",DEU:"Alemania",DJI:"Yibuti",DNK:"Dinamarca",DOM:"República Dominicana",DZA:"Argelia",ECU:"Ecuador",EGY:"Egipto",ERI:"Eritrea",ESP:"España",EST:"Estonia",ETH:"Etiopía",FIN:"Finlandia",FRA:"Francia",GAB:"Gabón",GBR:"Reino Unido",GEO:"Georgia",GHA:"Ghana",GIN:"Guinea",GMB:"Gambia",GNQ:"Guinea Ecuatorial",GRC:"Grecia",GRD:"Granada",GTM:"Guatemala",GUY:"Guyana",HKG:"Hong Kong",HND:"Honduras",HRV:"Croacia",HTI:"Haití",HUN:"Hungría",IDN:"Indonesia",IND:"India",IRL:"Irlanda",IRN:"Irán",IRQ:"Irak",ISL:"Islandia",ISR:"Israel",ITA:"Italia",JAM:"Jamaica",JOR:"Jordania",JPN:"Japón",KAZ:"Kazajistán",KEN:"Kenia",KGZ:"Kirguistán",KHM:"Camboya",KNA:"San Cristóbal y Nieves",KOR:"Corea del Sur",KWT:"Kuwait",LAO:"Laos",LBN:"Líbano",LBR:"Liberia",LBY:"Libia",LCA:"Santa Lucía",LKA:"Sri Lanka",LSO:"Lesoto",LTU:"Lituania",LUX:"Luxemburgo",LVA:"Letonia",MAR:"Marruecos",MDA:"Moldavia",MDG:"Madagascar",MDV:"Maldivas",MEX:"México",MKD:"Macedonia del Norte",MLI:"Malí",MLT:"Malta",MMR:"Myanmar",MNE:"Montenegro",MNG:"Mongolia",MNP:"Islas Marianas del Norte",MOZ:"Mozambique",MRT:"Mauritania",MWI:"Malaui",MYS:"Malasia",NAM:"Namibia",NCL:"Nueva Caledonia",NER:"Níger",NGA:"Nigeria",NIC:"Nicaragua",NLD:"Países Bajos",NOR:"Noruega",NPL:"Nepal",NRU:"Nauru",NZL:"Nueva Zelanda",OMN:"Omán",PAK:"Pakistán",PAN:"Panamá",PER:"Perú",PHL:"Filipinas",PNG:"Papúa Nueva Guinea",POL:"Polonia",PRI:"Puerto Rico",PRK:"Corea del Norte",PRT:"Portugal",PRY:"Paraguay",PSE:"Palestina",QAT:"Catar",ROU:"Rumania",RUS:"Rusia",RWA:"Ruanda",SAU:"Arabia Saudita",SDN:"Sudán",SEN:"Senegal",SLE:"Sierra Leona",SLV:"El Salvador",SOM:"Somalia",SRB:"Serbia",SSD:"Sudán del Sur",STP:"Santo Tomé y Príncipe",SUR:"Surinam",SVK:"Eslovaquia",SVN:"Eslovenia",SWE:"Suecia",SWZ:"Esuatini",SYR:"Siria",TCD:"Chad",TGO:"Togo",THA:"Tailandia",TJK:"Tayikistán",TKM:"Turkmenistán",TLS:"Timor Oriental",TON:"Tonga",TTO:"Trinidad y Tobago",TUN:"Túnez",TUR:"Turquía",TZA:"Tanzania",UGA:"Uganda",UKR:"Ucrania",URY:"Uruguay",USA:"Estados Unidos",UZB:"Uzbekistán",VCT:"San Vicente y las Granadinas",VEN:"Venezuela",VNM:"Vietnam",VUT:"Vanuatu",WLF:"Wallis y Futuna",WSM:"Samoa",YEM:"Yemen",ZAF:"Sudáfrica",ZMB:"Zambia",ZWE:"Zimbabue"};
 const NAMES={};Object.keys(COUNTRY_NAMES_ES).forEach(function(k){NAMES[k]=COUNTRY_NAMES_ES[k];});
+// ═══════════════════════════════════════════════
+// PRINCIPALES PRODUCTOS DE EXPORTACIÓN POR PAÍS
+// Simplificado a 2-4 categorías principales a partir de los
+// perfiles de comercio de OEC (Observatory of Economic Complexity,
+// oec.world) y, para los casos con menor cobertura en OEC, de los
+// perfiles de país de la OMC/UNCTAD. Es una síntesis divulgativa
+// (no series temporales ni participación % exacta) pensada para dar
+// contexto rápido al pasar el cursor o consultar la ficha de un país;
+// para un análisis de composición exportadora se recomienda acudir a
+// las fuentes primarias citadas.
+const EXPORTS_ES={AFG:"Frutos secos, higos, granadas, alfombras",AGO:"Petróleo crudo, diamantes, gas natural",ALB:"Calzado, prendas de vestir, cromo, petróleo",AND:"Vehículos de segunda mano, tabaco, mobiliario, servicios turísticos",ARE:"Petróleo crudo, oro reexportado, aluminio, joyería",ARG:"Soja y derivados, maíz, carne bovina, biodiésel",ARM:"Cobre, oro, diamantes tallados, bebidas alcohólicas",ATG:"Servicios turísticos, refinados de petróleo",AUS:"Mineral de hierro, carbón, gas natural, oro",AUT:"Maquinaria, vehículos y autopartes, productos farmacéuticos",AZE:"Petróleo crudo, gas natural, productos derivados del petróleo",BDI:"Café, oro, té",BEL:"Productos farmacéuticos, vehículos, diamantes, plásticos",BEN:"Algodón, castañas de cajú (anacardo), textiles",BFA:"Oro, algodón, sésamo",BGD:"Prendas de vestir (confección textil), cuero, yute",BGR:"Cobre refinado, maquinaria eléctrica, cereales",BHR:"Aluminio, petróleo refinado, productos químicos",BHS:"Servicios turísticos, sal, langosta",BIH:"Energía eléctrica, muebles, calzado, metales",BLR:"Potasa, productos petrolíferos, maquinaria",BLZ:"Azúcar, banano, cítricos, petróleo crudo",BMU:"Servicios financieros y de reaseguro",BOL:"Gas natural, minerales (zinc, plata, estaño), soja",BRA:"Soja, mineral de hierro, petróleo crudo, carne",BRN:"Petróleo crudo, gas natural licuado (GNL)",BTN:"Electricidad hidroeléctrica, ferroaleaciones, cemento",BWA:"Diamantes, cobre-níquel, carne bovina",CAF:"Diamantes, madera, algodón",CAN:"Petróleo crudo, automóviles, oro, madera y potasa",CHE:"Productos farmacéuticos, relojería, joyería, maquinaria de precisión",CHL:"Cobre, litio, celulosa, frutas y salmón",CHN:"Maquinaria eléctrica, electrónica de consumo, textiles, vehículos",CIV:"Cacao, castañas de cajú, oro, petróleo",CMR:"Petróleo crudo, cacao, madera, aluminio",COD:"Cobre, cobalto, diamantes",COG:"Petróleo crudo, madera",COL:"Petróleo crudo, carbón, café, flores",COM:"Vainilla, clavo de olor, ylang-ylang",CPV:"Productos de la pesca, calzado, servicios turísticos",CRI:"Circuitos integrados y equipo médico, banano, piña, café",CUB:"Servicios médicos, tabaco (puros), níquel, azúcar",CYP:"Servicios turísticos y navieros, productos farmacéuticos, halloumi",CZE:"Automóviles y autopartes, maquinaria, electrónica",DEU:"Automóviles, maquinaria industrial, productos químicos y farmacéuticos",DJI:"Servicios de reexportación portuaria, ganado en pie",DNK:"Productos farmacéuticos, maquinaria (bombas/turbinas eólicas), carne de cerdo",DOM:"Circuitos electrónicos, cacao, tabaco, oro, servicios turísticos",DZA:"Petróleo crudo, gas natural",ECU:"Petróleo crudo, banano, camarón, cacao",EGY:"Petróleo y gas, textiles y prendas de vestir, fertilizantes",ERI:"Oro, minerales metálicos, ganado",ESP:"Automóviles y autopartes, aceite de oliva, productos hortofrutícolas",EST:"Maquinaria eléctrica, madera, productos derivados del esquisto",ETH:"Café, flores cortadas, oleaginosas (sésamo)",FIN:"Celulosa y papel, maquinaria, tecnología (telecomunicaciones)",FRA:"Aeronaves, automóviles, productos farmacéuticos, vinos y licores",GAB:"Petróleo crudo, manganeso, madera",GBR:"Productos farmacéuticos, automóviles, maquinaria, servicios financieros",GEO:"Cobre, vinos, ferroaleaciones, avellanas",GHA:"Oro, cacao, petróleo crudo",GIN:"Bauxita, oro, diamantes",GMB:"Castañas de cajú, cacahuetes (maní), pescado",GNQ:"Petróleo crudo, gas natural licuado, madera",GRC:"Petróleo refinado, aceite de oliva, aluminio, servicios navieros y turísticos",GRD:"Nuez moscada, cacao, servicios turísticos",GTM:"Café, azúcar de caña, banano, cardamomo, prendas de vestir",GUY:"Petróleo crudo, oro, arroz, azúcar",HKG:"Reexportación de electrónica y joyería, servicios financieros",HND:"Café, banano, camarón, prendas de vestir maquiladoras",HRV:"Refinados de petróleo, maquinaria, servicios turísticos",HTI:"Prendas de vestir maquiladoras, cacao, aceites esenciales (vetiver)",HUN:"Automóviles y autopartes, maquinaria eléctrica, productos farmacéuticos",IDN:"Carbón, aceite de palma, gas natural, caucho",IND:"Productos petrolíferos refinados, joyería y piedras preciosas, productos farmacéuticos, textiles",IRL:"Productos farmacéuticos, dispositivos médicos, servicios de tecnología (software)",IRN:"Petróleo crudo, gas natural, petroquímicos, pistachos",IRQ:"Petróleo crudo",ISL:"Pescado y productos marinos, aluminio, servicios turísticos",ISR:"Circuitos integrados y tecnología, productos farmacéuticos, diamantes tallados",ITA:"Maquinaria, moda y textiles, automóviles, vinos",JAM:"Alúmina/bauxita, servicios turísticos, ron",JOR:"Fertilizantes (potasa y fosfatos), prendas de vestir, productos farmacéuticos",JPN:"Automóviles, maquinaria industrial, componentes electrónicos",KAZ:"Petróleo crudo, minerales (cobre, uranio), cereales",KEN:"Té, flores cortadas, café",KGZ:"Oro, minerales, textiles",KHM:"Prendas de vestir y calzado maquiladores, arroz, bicicletas",KNA:"Servicios turísticos, equipos electrónicos",KOR:"Circuitos integrados (semiconductores), automóviles, buques, petroquímicos",KWT:"Petróleo crudo, productos petroquímicos",LAO:"Electricidad hidroeléctrica, minerales (cobre), madera",LBN:"Joyería, productos alimenticios procesados, papel/cartón",LBR:"Caucho natural, mineral de hierro, oro",LBY:"Petróleo crudo, gas natural",LCA:"Servicios turísticos, banano",LKA:"Prendas de vestir textiles, té, caucho, especias",LSO:"Prendas de vestir maquiladoras, diamantes, agua (exportación a Sudáfrica)",LTU:"Productos refinados de petróleo, maquinaria eléctrica, muebles",LUX:"Servicios financieros, acero, productos químicos",LVA:"Madera, maquinaria eléctrica, cereales",MAR:"Fosfatos y fertilizantes, automóviles y autopartes, prendas de vestir, cítricos",MDA:"Cereales, vino, textiles",MDG:"Vainilla, textiles, níquel, clavo de olor",MDV:"Servicios turísticos, atún y productos pesqueros",MEX:"Automóviles y autopartes, equipos electrónicos, petróleo crudo, productos agrícolas",MKD:"Catalizadores/vehículos (ensamblaje), hierro y acero, prendas de vestir",MLI:"Oro, algodón, ganado",MLT:"Circuitos integrados, servicios financieros y de juego online, maquinaria",MMR:"Gas natural, prendas de vestir maquiladoras, piedras preciosas (jade), arroz",MNE:"Aluminio, energía eléctrica, servicios turísticos",MNG:"Carbón, cobre, oro",MNP:"Servicios turísticos",MOZ:"Aluminio, carbón, gas natural, camarón",MRT:"Mineral de hierro, oro, productos pesqueros",MWI:"Tabaco, té, azúcar de caña",MYS:"Circuitos electrónicos, aceite de palma, gas natural licuado, caucho",NAM:"Diamantes, uranio, pescado, cobre",NCL:"Ferroníquel, mineral de níquel",NER:"Uranio, oro, ganado",NGA:"Petróleo crudo, gas natural licuado, cacao",NIC:"Café, oro, carne bovina, prendas de vestir maquiladoras",NLD:"Reexportaciones y maquinaria, productos petrolíferos, flores y hortalizas",NOR:"Petróleo crudo, gas natural, pescado (salmón)",NPL:"Textiles/alfombras, servicios de remesas, cardamomo",NRU:"Fosfatos",NZL:"Lácteos (leche en polvo), carne, madera, vino",OMN:"Petróleo crudo, gas natural licuado, productos petroquímicos",PAK:"Textiles y prendas de vestir de algodón, arroz, cuero",PAN:"Servicios de tránsito del Canal y reexportación, banano, oro",PER:"Cobre, oro, harina de pescado, productos agrícolas (uvas, espárragos)",PHL:"Circuitos electrónicos (semiconductores), maquinaria eléctrica, aceite de coco",PNG:"Gas natural licuado, oro, cobre, aceite de palma",POL:"Automóviles y autopartes, maquinaria eléctrica, muebles",PRI:"Productos farmacéuticos, instrumentos médicos",PRK:"Minerales, textiles (maquila), productos pesqueros",PRT:"Automóviles y autopartes, calzado, corcho, vinos",PRY:"Soja, carne bovina, energía eléctrica",PSE:"Piedra y mármol, aceitunas, productos agrícolas",QAT:"Gas natural licuado, petróleo crudo, productos petroquímicos",ROU:"Automóviles y autopartes, maquinaria eléctrica, cereales",RUS:"Petróleo crudo, gas natural, metales, cereales",RWA:"Café, té, minerales (coltán, casiterita)",SAU:"Petróleo crudo, productos petroquímicos",SDN:"Oro, ganado, sésamo",SEN:"Productos pesqueros, ácido fosfórico/fertilizantes, oro",SLE:"Diamantes, rutilo (titanio), bauxita",SLV:"Prendas de vestir maquiladoras, café, azúcar",SOM:"Ganado en pie, plátanos, incienso y mirra",SRB:"Automóviles y autopartes, cereales, cobre, energía eléctrica",SSD:"Petróleo crudo",STP:"Cacao, copra",SUR:"Oro, petróleo crudo, aluminio (bauxita)",SVK:"Automóviles y autopartes, maquinaria eléctrica",SVN:"Productos farmacéuticos, maquinaria eléctrica, automóviles",SWE:"Maquinaria, vehículos, madera y celulosa, mineral de hierro",SWZ:"Azúcar de caña, pulpa de madera, concentrados de bebidas",SYR:"Petróleo crudo (histórico, muy reducido por el conflicto), aceitunas, textiles",TCD:"Petróleo crudo, algodón, ganado",TGO:"Fosfatos, cemento, algodón, café/cacao",THA:"Automóviles y autopartes, circuitos electrónicos, arroz, caucho",TJK:"Aluminio, algodón, minerales",TKM:"Gas natural, petróleo crudo, productos petroquímicos",TLS:"Café, petróleo/gas (histórico)",TON:"Calabaza, vainilla, raíz de kava",TTO:"Gas natural licuado, productos petroquímicos (amoníaco, metanol), petróleo",TUN:"Prendas de vestir textiles, componentes de automóviles, fosfatos, aceite de oliva",TUR:"Automóviles y autopartes, maquinaria, textiles, hierro y acero",TZA:"Oro, castañas de cajú, café, tabaco",UGA:"Café, oro, té, pescado",UKR:"Cereales (maíz, trigo), aceite de girasol, hierro y acero",URY:"Carne bovina, soja, celulosa, lácteos",USA:"Maquinaria y equipo, productos petrolíferos y gas, automóviles, productos farmacéuticos, soja",UZB:"Oro, gas natural, algodón, textiles",VCT:"Banano, servicios turísticos",VEN:"Petróleo crudo",VNM:"Electrónica de consumo (teléfonos y componentes), prendas de vestir, calzado, café",VUT:"Copra, cacao, kava",WLF:"Copra, artesanías (economía muy pequeña, escaso comercio exterior registrado)",WSM:"Aceite de coco, pescado",YEM:"Petróleo crudo (histórico), café, pescado",ZAF:"Metales del grupo del platino, oro, mineral de hierro, carbón, automóviles",ZMB:"Cobre, cobalto",ZWE:"Tabaco, oro, ferrocromo, platino"};
+function updateExportsBox(code){
+  const box=document.getElementById("exports-box");
+  if(!box)return;
+  const ex=EXPORTS_ES[code];
+  if(!ex){box.style.display="none";box.innerHTML="";return;}
+  box.style.display="block";
+  box.innerHTML=`<i class="ti ti-truck-delivery"></i><strong>Principales exportaciones:</strong> ${ex}`;
+}
 const compareList=[];
 let feats=[],cInd="gdp_pc",cYi=28,play=false,tim=null,curCode=null,curBreaks=null,prevInd="gdp_pc",lastTradeHover=null;
 let loadedFlags={gdp_pc:false,gdp:false,hdi:true,unemp:false,gini:false,tot:false,debtgni:false,debtserv:false,gov:false,rnd:false,fdi:false,co2:false,hitech:false,manuf:false};
@@ -954,7 +982,9 @@ function bldLeg(sorted,cl,ind){
     leg.innerHTML=`<span style="font-size:11px;color:var(--txt2)">Cargando datos del indicador…</span>`;return;
   }
   const labels=["<"+ind.fmt(curBreaks[0]),ind.fmt(curBreaks[0])+"–"+ind.fmt(curBreaks[1]),ind.fmt(curBreaks[1])+"–"+ind.fmt(curBreaks[2]),ind.fmt(curBreaks[2])+"–"+ind.fmt(curBreaks[3]),ind.fmt(curBreaks[3])+"–"+ind.fmt(curBreaks[4]),">"+ind.fmt(curBreaks[4])];
-  leg.innerHTML=`<span style="font-size:11px;color:#7f1d1d;font-weight:700">Subdesarrollado</span>`+cl.map((c,i)=>`<span style="display:inline-flex;align-items:center;gap:2px"><span class="lsw" style="background:${c}"></span><span style="font-size:10.5px">${labels[i]}</span></span>`).join("")+`<span style="font-size:11px;color:#166534;font-weight:700">Desarrollado</span><span style="display:inline-flex;align-items:center;gap:2px;margin-left:5px"><span class="lsw" style="background:var(--bdr)"></span><span style="font-size:10.5px">Sin datos</span></span>`;
+  const loColor=ind.invert?"#166534":"#7f1d1d", hiColor=ind.invert?"#7f1d1d":"#166534";
+  const loTxt=ind.legLo||"Valor bajo", hiTxt=ind.legHi||"Valor alto";
+  leg.innerHTML=`<span style="font-size:11px;color:${loColor};font-weight:700">${loTxt}</span>`+cl.map((c,i)=>`<span style="display:inline-flex;align-items:center;gap:2px"><span class="lsw" style="background:${c}"></span><span style="font-size:10.5px">${labels[i]}</span></span>`).join("")+`<span style="font-size:11px;color:${hiColor};font-weight:700">${hiTxt}</span><span style="display:inline-flex;align-items:center;gap:2px;margin-left:5px"><span class="lsw" style="background:var(--bdr)"></span><span style="font-size:10.5px">Sin datos</span></span>`;
 }
 
 // ═══════════════════════════════════════════════
@@ -981,6 +1011,7 @@ function showPop(code, updateButtons){
   const ind=INDS[cInd];
   document.getElementById("pt").textContent=getName(code);
   document.getElementById("pc-btn").style.display="flex";
+  updateExportsBox(code);
   if(updateButtons){
     document.getElementById("print-btn").style.display="flex";
     document.getElementById("compare-btn").style.display="flex";
@@ -1159,7 +1190,7 @@ function drawMiniChart(code,ind){
 // ═══════════════════════════════════════════════
 const conceptBox=document.getElementById("concept-box");
 let conceptTimer=null;
-document.querySelectorAll(".ibtn, #trade-btn").forEach(btn=>{
+document.querySelectorAll(".ibtn, #trade-btn, #periphery-btn").forEach(btn=>{
   function showConcept(){
     clearTimeout(conceptTimer);
     conceptBox.innerHTML=`<strong>${btn.dataset.concept}</strong>${btn.dataset.def}`;
@@ -1213,8 +1244,7 @@ function toggleAnalyticsPanel(){
   btn.setAttribute("aria-expanded",willOpen?"true":"false");
 }
 document.getElementById("analytics-btn").onclick=(e)=>{e.stopPropagation();toggleAnalyticsPanel();};
-document.getElementById("analytics-panel").addEventListener("click",e=>e.stopPropagation());
-document.addEventListener("click",()=>closeAnalyticsPanel());
+document.getElementById("analytics-panel").addEventListener("click",e=>{if(e.target===document.getElementById("analytics-panel"))closeAnalyticsPanel();});
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeAnalyticsPanel();});
 
 // ═══════════════════════════════════════════════
@@ -1512,6 +1542,7 @@ function showTradePop(code){
   curCode=code;
   document.getElementById("pt").textContent=getName(code)||blocCountryName(code);
   document.getElementById("pc-btn").style.display="flex";
+  updateExportsBox(code);
   document.getElementById("pmetrics").style.display="none";
   document.getElementById("analytic-metric").style.display="none";
   document.getElementById("hdi-components").style.display="none";
@@ -1538,6 +1569,7 @@ function showTradePop(code){
 function clearTradePop(){
   document.getElementById("pt").textContent="Pasa el cursor o selecciona un país para ver su bloque comercial";
   document.getElementById("pc-btn").style.display="none";
+  document.getElementById("exports-box").style.display="none";
   document.getElementById("pmetrics").style.display="none";
   document.getElementById("analytic-metric").style.display="none";
   document.getElementById("hdi-components").style.display="none";
@@ -1725,6 +1757,7 @@ function showPeripheryPop(code){
   curCode=code;
   document.getElementById("pt").textContent=getName(code);
   document.getElementById("pc-btn").style.display="flex";
+  updateExportsBox(code);
   document.getElementById("pmetrics").style.display="none";
   document.getElementById("analytic-metric").style.display="none";
   document.getElementById("hdi-components").style.display="none";
@@ -1742,6 +1775,7 @@ function showPeripheryPop(code){
 function clearPeripheryPop(){
   document.getElementById("pt").textContent="Pasa el cursor o selecciona un país para ver su posición estructural";
   document.getElementById("pc-btn").style.display="none";
+  document.getElementById("exports-box").style.display="none";
   document.getElementById("pmetrics").style.display="none";
   document.getElementById("analytic-metric").style.display="none";
   document.getElementById("hdi-components").style.display="none";
@@ -2354,13 +2388,14 @@ function handleMapMouseMove(evt, d) {
   if (!d.a3) return;
   var wr = mapcol.getBoundingClientRect();
   var nm = NAMES[d.a3] || d.a3;
+  var exLine = (cInd === 'periphery' && EXPORTS_ES[d.a3]) ? '<span class="ttexp">Exporta: ' + EXPORTS_ES[d.a3] + '</span>' : '';
   if (cInd === 'trade') {
     var blocs = blocsOf(d.a3);
     ttEl.innerHTML = '<b>' + nm + '</b><span class="ttlbl">' + (blocs.length ? blocs.join(', ') : 'Sin bloque registrado') + '</span>';
     if (d.a3 !== lastTradeHover) { lastTradeHover = d.a3; showTradePop(d.a3); }
   } else if (cInd === 'periphery') {
     var zoneLbl = WS_INFO[wsZoneOf(d.a3)].label;
-    ttEl.innerHTML = '<b>' + nm + '</b><span class="ttlbl">' + zoneLbl + '</span>';
+    ttEl.innerHTML = '<b>' + nm + '</b><span class="ttlbl">' + zoneLbl + '</span>' + exLine;
     if (d.a3 !== lastTradeHover) { lastTradeHover = d.a3; showPeripheryPop(d.a3); }
   } else {
     var v = gv(d.a3), ind = INDS[cInd];
