@@ -205,8 +205,9 @@
   .pill-pendiente{background:#fff4e0;color:#b8790b;}
   /* Semáforo del estado de la donación: verde=entregada, amarillo=en curso/pendiente, naranja=no aceptaron, gris=no requiere */
   .pill-don-verde{background:var(--verde-100);color:var(--verde);}
-  .pill-don-amarillo{background:#fff4e0;color:#b8790b;}
-  .pill-don-amarillo2{background:#fff9db;color:#9c7a00;}
+  .pill-don-amarillo{background:#ffe066;color:#6b4e00;font-weight:600;}
+  .pill-don-azul{background:#e0f0ff;color:#1c6fb8;}
+  .pill-don-blanco{background:#ffffff;color:#555;border:1px solid #ddd;}
   .pill-don-naranja{background:var(--naranja-100);color:var(--naranja);}
   .pill-don-gris{background:#f1f1f1;color:#888;}
 
@@ -1057,8 +1058,9 @@ function pillDonacion(d){
   if(t.includes('no requiere')) return `<span class="pill pill-don-gris">${d}</span>`;
   if(t.includes('no aceptaron') || t.includes('rechaz')) return `<span class="pill pill-don-naranja">${d}</span>`;
   if(t.includes('entregada') && !t.includes('proceso')) return `<span class="pill pill-don-verde">${d}</span>`;
-  if(t.includes('pendiente por contacto')) return `<span class="pill pill-don-amarillo2">${d}</span>`;
-  if(t.includes('pendiente') || t.includes('proceso')) return `<span class="pill pill-don-amarillo">${d}</span>`;
+  if(t.includes('proceso')) return `<span class="pill pill-don-blanco">${d}</span>`;
+  if(t.includes('pendiente por contacto') || t.includes('pendiente de contacto')) return `<span class="pill pill-don-azul">${d}</span>`;
+  if(t.includes('pendiente')) return `<span class="pill pill-don-amarillo">${d}</span>`;
   return pillDonacionLegacy(d);
 }
 function pillDonacionLegacy(d){
