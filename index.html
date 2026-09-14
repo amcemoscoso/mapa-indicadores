@@ -2580,21 +2580,98 @@ function formatearFechaHistorial(iso){
   }catch(e){ return iso; }
 }
 
-async function cargarDatos(){
-  // La app depende únicamente de Supabase (fuente de verdad). Solo si aún
-  // no se ha sembrado nunca (Supabase vacío) se carga el SEED inicial una
-  // única vez; luego todo se lee y escribe siempre contra Supabase.
-  try{
-    const seeded = await storageAPI.get('meta:seeded', true).catch(()=>null);
-    if(!seeded){
-      for(const v of SEED){
-        v.id = 'v_' + Math.random().toString(36).slice(2,10);
-        await storageAPI.set('visita:' + v.id, JSON.stringify(v), true);
-      }
-      await storageAPI.set('meta:seeded', 'true', true);
-    }
-  }catch(e){ console.error('seed error', e); }
+// Mapa de fusión manual entre los centros de la siembra de demostración
+// (SEED, ya retirada de uso) y la actividad real del Excel a la que
+// corresponden aproximadamente. Se usa una única vez para no perder los
+// contactos/observaciones que ya se habían cargado ahí antes de eliminar
+// esos registros de demostración. La clave es el nombre EXACTO tal como
+// aparecía en SEED; el valor es el/los numActividad del Excel que reciben
+// esa información.
+const FUSION_DEMO_A_EXCEL = {
+  "Red municipal (7 centros transitorios) - Centro Rosendo Castillo / Alcaldía de Guarenas": ["15B"],
+  "Carpas itinerantes alrededor de edificios (Guarenas)": ["13B", "15E"],
+  "UEN Francisco Pimentel": ["34"],
+  "UEN Gran Colombia (Simoncito Edificio Perú)": ["19"],
+  "Gimnasio Vertical Quinta Crespo": ["27", "31"],
+  // Sin equivalente claro en el archivo Excel (se eliminan sin poder
+  // trasladar su información adicional a ningún centro):
+  // "CE José Gervasio Artigas", "Escuela Técnica Industrial Rafael Vegas",
+  // "Taller PEAS - UE Pedro Emilio Coll", "UE Jesús Enrique Lossada"
+};
 
+// Limpieza ÚNICA (protegida por bandera): deja únicamente las actividades
+// que existen en el archivo Excel de control, eliminando cualquier otro
+// registro (p.ej. los de la siembra de demostración inicial, o duplicados
+// que hayan quedado de una importación parcial anterior). Antes de borrar
+// un registro que no es del Excel, intenta trasladar sus contactos y
+// observaciones al centro del Excel correspondiente (ver FUSION_DEMO_A_EXCEL).
+// Va protegida por bandera para que, una vez hecha, nunca vuelva a tocar
+// actividades nuevas que el equipo cargue después manualmente (esas no
+// tienen por qué coincidir con un numActividad del Excel).
+async function limpiarSoloActividadesExcel(){
+  try{
+    const yaLimpiado = await storageAPI.get('meta:limpieza_solo_excel', true).catch(()=>null);
+    if(yaLimpiado) return;
+
+    const numsExcel = new Set(SEED_ENTREGAS_EXCEL.map(v => String(v.numActividad).trim()));
+    const vistos = new Set();
+    const aBorrar = [];
+    const extras = [];
+
+    for(const v of visitas){
+      const num = v.numActividad ? String(v.numActividad).trim() : '';
+      if(num && numsExcel.has(num)){
+        if(vistos.has(num)){
+          aBorrar.push(v); // duplicado de una actividad del Excel ya vista
+        } else {
+          vistos.add(num);
+        }
+      } else {
+        extras.push(v); // no pertenece al Excel (p.ej. demo, o num escrito distinto)
+      }
+    }
+
+    let fusionadas = 0, sinEquivalente = 0;
+    for(const v of extras){
+      aBorrar.push(v);
+      const destinosNums = FUSION_DEMO_A_EXCEL[v.nombre];
+      if(destinosNums && destinosNums.length){
+        for(const numDestino of destinosNums){
+          const destino = visitas.find(x => String(x.numActividad||'').trim() === numDestino);
+          if(!destino) continue;
+          const nombresExistentes = new Set((destino.contactos||[]).map(c=>c.nombre));
+          const nuevosContactos = (v.contactos||[]).filter(c=>c.nombre && !nombresExistentes.has(c.nombre));
+          destino.contactos = [...(destino.contactos||[]), ...nuevosContactos];
+          if(v.obs && !(destino.obs||'').includes(v.obs)){
+            destino.obs = destino.obs ? destino.obs + ' | ' + v.obs : v.obs;
+          }
+          await storageAPI.set('visita:' + destino.id, JSON.stringify(destino), true);
+          fusionadas++;
+        }
+      } else {
+        sinEquivalente++;
+      }
+    }
+
+    for(const v of aBorrar){
+      await storageAPI.delete('visita:' + v.id, true);
+    }
+
+    visitas = visitas.filter(v => !aBorrar.includes(v));
+
+    await storageAPI.set('meta:limpieza_solo_excel', 'true', true);
+
+    if(aBorrar.length){
+      let msg = `Limpieza: se eliminaron ${aBorrar.length} actividad(es) que no son del Excel`;
+      if(fusionadas) msg += `, trasladando contactos/observaciones a ${fusionadas} centro(s) del Excel`;
+      if(sinEquivalente) msg += `. ${sinEquivalente} no tenían un centro equivalente claro (se perdió su información adicional)`;
+      toast(msg + '.');
+      console.log(msg);
+    }
+  }catch(e){ console.error('limpiarSoloActividadesExcel error', e); }
+}
+
+async function cargarDatos(){
   visitas = [];
   try{
     const listado = await storageAPI.list('visita:', true);
@@ -2643,6 +2720,9 @@ async function cargarDatos(){
       }
     }
   }catch(e){ console.error('seed entregas excel error', e); }
+
+  // Limpieza única: deja solo las actividades del Excel (ver función arriba).
+  await limpiarSoloActividadesExcel();
 
   visitas.sort((a,b)=> (a.fecha||'').localeCompare(b.fecha||'') || (a.nombre||'').localeCompare(b.nombre||''));
   await cargarContactosExtra();
